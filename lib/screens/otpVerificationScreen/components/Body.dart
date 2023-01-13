@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:project_x/extra%20components/defaultButton.dart';
+import 'package:project_x/homeScreen/homeScreen.dart';
+import 'package:project_x/mapScreen/mapScreen.dart';
 
 import '../../../constants.dart';
 import 'otpForm.dart';
@@ -19,7 +20,7 @@ class Body extends StatelessWidget {
             children: [
               // SizedBox(height: SizeConfig.screenHeight! * 0.0005),
               const SizedBox(height: 30),
-              Text(
+              const Text(
                 "Verification Code",
                 style: headingStyle,
               ),
@@ -75,7 +76,10 @@ class Body extends StatelessWidget {
                 width: 200,
                 height: 55,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                  },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                         const Color.fromARGB(255, 30, 117, 247)),

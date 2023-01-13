@@ -27,7 +27,7 @@ class Body extends StatelessWidget {
                 child: Image.asset("assets/images/logo.jpeg"),
               ),
               const SizedBox(height: 15),
-              Text(
+              const Text(
                 "Welcome Back",
                 style: headingStyle,
               ),

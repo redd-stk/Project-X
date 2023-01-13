@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:project_x/size_config.dart';
 
 const appPrimaryColor = Color.fromARGB(255, 30, 117, 247);
@@ -13,3 +14,4 @@ const headingStyle = TextStyle(
 );
 
 const google_api_key = "AIzaSyBVy1HLRClXnGjKLL-ja-cqwY9T_U85yQY";
+const sourceLocation = LatLng(-0.142565, 35.946346);
