@@ -43,11 +43,11 @@ class _SignInFormState extends State<SignInForm> {
         textInputAction: TextInputAction.next,
         onSaved: (newValue) => email = newValue!,
         decoration: InputDecoration(
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
               fontSize: 18,
               color: appPrimaryColor,
               fontWeight: FontWeight.bold),
-          hintStyle: TextStyle(fontSize: 14),
+          hintStyle: const TextStyle(fontSize: 14),
           labelText: "Email",
           hintText: "Enter Your Email address",
           enabledBorder: OutlineInputBorder(
@@ -69,12 +69,12 @@ class _SignInFormState extends State<SignInForm> {
         textInputAction: TextInputAction.done,
         onSaved: (newValue) => password = newValue!,
         decoration: InputDecoration(
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
               fontSize: 18,
               color: appPrimaryColor,
               fontWeight: FontWeight.bold),
           labelText: "Password",
-          hintStyle: TextStyle(fontSize: 14),
+          hintStyle: const TextStyle(fontSize: 14),
           hintText: "Enter Your Password",
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),

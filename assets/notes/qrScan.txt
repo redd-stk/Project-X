@@ -1,0 +1,51 @@
+Here is an example of how you can capture payment details from scanning QR codes in a Flutter app, similar to the MPESA app QR code payment scanner, using the flutter_barcode_scanner plugin:
+
+Copy code
+import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+
+class PaymentQRScanner extends StatefulWidget {
+  @override
+  _PaymentQRScannerState createState() => _PaymentQRScannerState();
+}
+
+class _PaymentQRScannerState extends State<PaymentQRScanner> {
+  String _paymentDetails = '';
+  String _barcode = '';
+
+  Future _scanQR() async {
+    _barcode = await FlutterBarcodeScanner.scanBarcode("#004297", "Cancel", true, ScanMode.QR);
+
+    setState(() {
+      _paymentDetails = _barcode;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('QR Code Payment Scanner'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: Center(
+              child: _paymentDetails == ''
+                  ? Text('Scan a QR code to capture payment details')
+                  : Text(_paymentDetails),
+            ),
+          ),
+          SizedBox(height: 10),
+          RaisedButton(
+            onPressed: _scanQR,
+            child: Text('Scan QR Code'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+In this example, the _scanQR function is called when the user taps the "Scan QR Code" button. It uses the FlutterBarcodeScanner.scanBarcode function to scan the QR code, passing in the desired color of the scan (in this case, "#004297"), the text for the cancel button, a boolean value for whether or not to show flash, and the scan mode as QR. The scanned data is then stored in the _barcode variable and displayed on the screen.
+
+It's important to note that this is a simplified example and you may need to handle additional cases such as when user's device does not have a camera, when the camera permission is not granted, and when the user pressed the back button before scanning anything. Also, you would have to parse the scanned string to extract the relevant payment details such as amount and account number.

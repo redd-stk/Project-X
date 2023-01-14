@@ -13,5 +13,5 @@ const headingStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const google_api_key = "AIzaSyBVy1HLRClXnGjKLL-ja-cqwY9T_U85yQY";
+const googleApiKey = "AIzaSyBVy1HLRClXnGjKLL-ja-cqwY9T_U85yQY";
 const sourceLocation = LatLng(-0.142565, 35.946346);

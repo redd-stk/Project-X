@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project_x/screens/signUpScreen/components/SignUpForm.dart';
 
 import '../../../constants.dart';
-import '../../../extra components/defaultButton.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -16,10 +15,11 @@ class Body extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
           child: Column(
+            // ignore: prefer_const_literals_to_create_immutables
             children: [
               // SizedBox(height: SizeConfig.screenHeight! * 0.0005),
               const SizedBox(height: 20),
-              Text(
+              const Text(
                 "Create Your Account",
                 style: headingStyle,
               ),
@@ -27,7 +27,7 @@ class Body extends StatelessWidget {
                 "Fill in your details below to continue",
                 textAlign: TextAlign.center,
               ),
-              SignUpForm(),
+              const SignUpForm(),
               
             ],
           ),

@@ -92,7 +92,6 @@ class _SignUpFormState extends State<SignUpForm> {
           return "Please Enter a valid Email";
         }
         return null;
-        ;
       },
       onSaved: (newValue) => email = newValue!,
       decoration: InputDecoration(

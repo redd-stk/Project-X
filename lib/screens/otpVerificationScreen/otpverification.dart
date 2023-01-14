@@ -19,7 +19,7 @@ class OtpVerification extends StatelessWidget {
           },
         ),
       ),
-      body: Body(),
+      body: const Body(),
     );
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_x/homeScreen/homeScreen.dart';
-import 'package:project_x/mapScreen/mapScreen.dart';
 
 import '../../../constants.dart';
+import '../../homeScreen/homeScreen.dart';
 import 'otpForm.dart';
 
 class Body extends StatelessWidget {
@@ -38,7 +37,7 @@ class Body extends StatelessWidget {
                         color: appPrimaryColor,
                         fontWeight: FontWeight.bold),
                   )),
-              OtpForm(),
+              const OtpForm(),
 
               const SizedBox(height: 20),
               const Text("Didn't receive any code?"),
@@ -54,7 +53,7 @@ class Body extends StatelessWidget {
                         onPressed: () {},
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(
-                              Color.fromARGB(255, 233, 233, 233)),
+                              const Color.fromARGB(255, 233, 233, 233)),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -77,8 +76,10 @@ class Body extends StatelessWidget {
                 height: 55,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()));
                   },
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
@@ -96,55 +97,6 @@ class Body extends StatelessWidget {
                   ),
                 ),
               ),
-              //           const SizedBox(height: 170),
-              //           Padding(
-              //             padding: const EdgeInsets.symmetric(horizontal: 15),
-              //             child: Row(
-              //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //               children: [
-              //                 SizedBox(
-              //                   width: 100,
-              //                   height: 50,
-              //                   child: TextButton(
-              //                     onPressed: () {},
-              //                     style: ButtonStyle(
-              //                       backgroundColor: MaterialStateProperty.all<Color>(
-              //                           const Color.fromARGB(255, 30, 117, 247)),
-              //                       shape:
-              //                           MaterialStateProperty.all<RoundedRectangleBorder>(
-              //                               RoundedRectangleBorder(
-              //                                   borderRadius: BorderRadius.circular(10))),
-              //                     ),
-              //                     child: const Text(
-              //                       "Resend",
-              //                       style: TextStyle(
-              //                           color: Colors.white, fontWeight: FontWeight.bold),
-              //                     ),
-              //                   ),
-              //                 ),
-              //                 SizedBox(
-              //                   width: 100,
-              //                   height: 50,
-              //                   child: TextButton(
-              //                     onPressed: () {},
-              //                     style: ButtonStyle(
-              //                       backgroundColor: MaterialStateProperty.all<Color>(
-              //                           const Color.fromARGB(255, 30, 117, 247)),
-              //                       shape:
-              //                           MaterialStateProperty.all<RoundedRectangleBorder>(
-              //                               RoundedRectangleBorder(
-              //                                   borderRadius: BorderRadius.circular(10))),
-              //                     ),
-              //                     child: const Text(
-              //                       "Confirm",
-              //                       style: TextStyle(
-              //                           color: Colors.white, fontWeight: FontWeight.bold),
-              //                     ),
-              //                   ),
-              //                 ),
-              //               ],
-              //             ),
-              //           ),
             ],
           ),
         ),

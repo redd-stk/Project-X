@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:project_x/screens/signInScreen/signInScreen.dart';
 import 'package:project_x/theme.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'PublicTransportApp',
       theme: theme(),
       // home: SignUpScreen(),
-      home: SignInScreen(),
+      home: const SignInScreen(),
     );
   }
 }

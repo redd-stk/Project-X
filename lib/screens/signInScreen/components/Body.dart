@@ -37,7 +37,7 @@ class Body extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 20),
-              SignInForm(),
+              const SignInForm(),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +53,6 @@ class Body extends StatelessWidget {
                   const SizedBox(height: 5),
                   TextButton(
                     onPressed: () {},
-                    // TODO : Add a new screen for phone number sign in
                     child: const Text(
                       "Forgot Password?",
                       style: TextStyle(color: textButtonColor, fontSize: 13),
@@ -70,7 +69,7 @@ class Body extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => OtpVerification()));
+                              builder: (context) => const OtpVerification()));
                     }),
               ),
               const SizedBox(height: 25),
@@ -97,7 +96,7 @@ class NoAccountText extends StatelessWidget {
         ),
         GestureDetector(
             onTap: () => Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SignUpScreen())),
+                MaterialPageRoute(builder: (context) => const SignUpScreen())),
             child: const Text(
               "Sign Up ",
               style: TextStyle(fontSize: 14, color: textButtonColor),
