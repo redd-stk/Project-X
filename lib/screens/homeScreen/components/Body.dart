@@ -95,7 +95,8 @@ class _BodyState extends State<Body> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PaymentQRScanner()));
+                                    builder: (context) =>
+                                        QrScannerContainer()));
                           },
                           child: Container(
                             height: 130,

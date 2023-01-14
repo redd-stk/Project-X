@@ -1,0 +1,44 @@
+From the code in the above previous response, generate a flutter code for the QRViewExample screen
+
+Copy code
+import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+class QRViewExample extends StatefulWidget {
+  QRViewExample({Key key, this.onQRViewCreated}) : super(key: key);
+
+  final QRViewCreatedCallback onQRViewCreated;
+
+  @override
+  _QRViewExampleState createState() => _QRViewExampleState();
+}
+
+class _QRViewExampleState extends State<QRViewExample> {
+  QRViewController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Scan QR Code"),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: QRView(
+              key: widget.key,
+              onQRViewCreated: widget.onQRViewCreated,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+}
+In this code, we created a stateful widget called QRViewExample which takes in the onQRViewCreated callback. Inside the state, we have defined a Scaffold widget with an AppBar at the top with the title "Scan QR Code", and inside the body, we have an Expanded widget that contains the QRView widget. The QRView is given the key and callback that was passed in. The QRViewController is used to control the QRView and listen to the scanned data stream. The scanned data is then passed back to the parent screen via the onQRViewCreated callback. The QRViewController is disposed of in the dispose method.

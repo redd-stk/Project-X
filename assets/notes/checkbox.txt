@@ -1,0 +1,57 @@
+Generate flutter code of three checkboxes in a row widget with the text "Send Money", "Till number" and "Paybill" beside each and only one of them can be chosen at a time. Modify the checkboxes and text to fit along the width of normal screen size all in one line
+Copy code
+import 'package:flutter/material.dart';
+
+class CheckboxRow extends StatefulWidget {
+  @override
+  _CheckboxRowState createState() => _CheckboxRowState();
+}
+
+class _CheckboxRowState extends State<CheckboxRow> {
+  bool _sendMoney = false;
+  bool _tillNumber = false;
+  bool _paybill = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        Checkbox(
+          value: _sendMoney,
+          onChanged: (value) {
+            setState(() {
+              _sendMoney = value;
+              _tillNumber = false;
+              _paybill = false;
+            });
+          },
+        ),
+        Text("Send Money"),
+        Checkbox(
+          value: _tillNumber,
+          onChanged: (value) {
+            setState(() {
+              _tillNumber = value;
+              _sendMoney = false;
+              _paybill = false;
+            });
+          },
+        ),
+        Text("Till number"),
+        Checkbox(
+          value: _paybill,
+          onChanged: (value) {
+            setState(() {
+              _paybill = value;
+              _sendMoney = false;
+              _tillNumber = false;
+            });
+          },
+        ),
+        Text("Paybill"),
+      ],
+    );
+  }
+}
+In the above code, we first imported the required package and then created a StatefulWidget called CheckboxRow. Inside the state, we defined three boolean variables that will keep track of the selected checkbox. We also defined the Checkbox widgets, each with its corresponding text beside it and with onChanged function that sets the state of the variables based on the checkbox selection. The row is set to align the widgets evenly across the screen.

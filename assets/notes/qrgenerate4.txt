@@ -1,7 +1,7 @@
+generate a flutter code of a container of height 250 and width 300 with a camera icon and a "scan Qr code" text button inside that navigates to a qr code scan screen.
+Copy code
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
-
-import 'components/QrView.dart';
 
 class QrScannerContainer extends StatefulWidget {
   @override
@@ -10,7 +10,7 @@ class QrScannerContainer extends StatefulWidget {
 
 class _QrScannerContainerState extends State<QrScannerContainer> {
   GlobalKey qrKey = GlobalKey();
-  late QRViewController controller;
+  QRViewController controller;
   String qrText = "";
 
   @override
@@ -33,10 +33,9 @@ class _QrScannerContainerState extends State<QrScannerContainer> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => QRViewScreen(
+                  builder: (context) => QRViewExample(
                     key: qrKey,
                     onQRViewCreated: _onQRViewCreated,
-                    qrKey: qrKey,
                   ),
                 ),
               );
@@ -52,14 +51,15 @@ class _QrScannerContainerState extends State<QrScannerContainer> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       setState(() {
-        qrText = scanData as String;
+        qrText = scanData;
       });
     });
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    controller?.dispose();
     super.dispose();
   }
 }
+In the above code, we created a stateful widget called QrScannerContainer. Inside the state, we have defined a container with a height of 250 and width of 300. Inside this container, we have a Column widget that contains an Icon of a camera and a button with text "Scan QR Code" which on press navigates to the QRViewExample screen. The QRViewExample screen is where the QR code scan takes place, and the scanned data is returned to the parent screen. The QRViewController is used to control the QRView and listen to the scanned data stream. The scanned data is then stored in the qrText variable. The QRViewController is disposed of in the dispose method, and the scanned data is returned to the parent screen.

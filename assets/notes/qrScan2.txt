@@ -1,0 +1,64 @@
+Here is an example of how you can use the qr_code_scanner package to capture payment details from scanning QR codes in a Flutter app:
+
+Copy code
+import 'package:flutter/material.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:qr_code_scanner/qr_scanner_overlay_shape.dart';
+
+class PaymentQRScanner extends StatefulWidget {
+  @override
+  _PaymentQRScannerState createState() => _PaymentQRScannerState();
+}
+
+class _PaymentQRScannerState extends State<PaymentQRScanner> {
+  QRViewController _controller;
+  String _paymentDetails = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('QR Code Payment Scanner'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Expanded(
+            child: QRView(
+              key: GlobalKey(debugLabel: 'QR'),
+              onQRViewCreated: _onQRViewCreated,
+              overlay: QrScannerOverlayShape(
+                borderColor: Colors.red,
+                borderRadius: 10,
+                borderLength: 30,
+                borderWidth: 10,
+                cutOutSize: 300,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(_paymentDetails),
+        ],
+      ),
+    );
+  }
+
+  void _onQRViewCreated(QRViewController controller) {
+    this._controller = controller;
+    controller.scannedDataStream.listen((scanData) {
+      setState(() {
+        _paymentDetails = scanData;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+}
+In this example, the QRView widget is used to display the camera view and scan for QR codes. The onQRViewCreated callback function is called when the QRView is created, and it sets the _controller variable to the passed in QRViewController object.
+
+The scanned data is then passed to the scannedDataStream which is listened to and the scanned data is stored in the _paymentDetails variable and displayed on the screen. You can customize the appearance of the QR code scanner by passing various parameters to the QrScannerOverlayShape widget, such as the camera overlay color and the flash on/off icon.
+
+It's important to note that this is a simplified example and you may need to handle additional cases such as when the user's device does not have a camera, when the camera permission is not granted, and when the user pressed the back button before scanning anything. Also, you would have to parse the scanned string to extract

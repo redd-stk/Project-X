@@ -47,7 +47,10 @@ class Body extends StatelessWidget {
                     // TODO : Add a new screen for phone number sign in
                     child: const Text(
                       "Login with phone number",
-                      style: TextStyle(color: textButtonColor, fontSize: 13),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: textButtonColor,
+                          fontSize: 13),
                     ),
                   ),
                   const SizedBox(height: 5),
@@ -55,7 +58,10 @@ class Body extends StatelessWidget {
                     onPressed: () {},
                     child: const Text(
                       "Forgot Password?",
-                      style: TextStyle(color: textButtonColor, fontSize: 13),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: textButtonColor,
+                          fontSize: 13),
                     ),
                   ),
                 ],
