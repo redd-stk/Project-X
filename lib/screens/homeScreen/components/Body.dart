@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/screens/PaymentScreen/paymentScreen.dart';
 import '../../../constants.dart';
+import '../../locationSearchScreen/locationSearchScreen.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -64,7 +65,13 @@ class _BodyState extends State<Body> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SearchLocationScreen()));
+                          },
                           child: Container(
                             height: 130,
                             width: 170,
@@ -96,7 +103,7 @@ class _BodyState extends State<Body> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        QrScannerContainer()));
+                                        const QRScanScreen1()));
                           },
                           child: Container(
                             height: 130,
@@ -105,18 +112,20 @@ class _BodyState extends State<Body> {
                             decoration: BoxDecoration(
                               image: const DecorationImage(
                                   fit: BoxFit.cover,
-                                  opacity: 0.07,
+                                  opacity: 0.7,
                                   image:
-                                      AssetImage("assets/images/busMap.jpg")),
+                                      AssetImage("assets/images/payment.jpg")),
                               color: appPrimaryColor,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: const Padding(
-                              padding: EdgeInsets.only(left: 50, top: 50),
+                              padding:
+                                  EdgeInsets.only(left: 40, top: 15, right: 10),
                               child: Text(
-                                "Make A \n Payment",
+                                "Make A Payment",
+                                textDirection: TextDirection.rtl,
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 0, 0, 0),
+                                    color: Color.fromARGB(255, 224, 34, 91),
                                     fontSize: 25,
                                     fontWeight: FontWeight.w900),
                               ),
@@ -138,18 +147,16 @@ class _BodyState extends State<Body> {
                               image: const DecorationImage(
                                   fit: BoxFit.cover,
                                   image: AssetImage(
-                                      "assets/images/mapSample.png")),
+                                      "assets/images/newGoogleMap.jpg")),
                               color: appPrimaryColor,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: const Padding(
-                              padding: EdgeInsets.only(
-                                left: 20,
-                              ),
+                              padding: EdgeInsets.only(top: 20),
                               child: Text(
                                 "View \n Map",
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 212, 71, 71),
+                                    color: Color.fromARGB(213, 238, 8, 8),
                                     fontSize: 26,
                                     fontWeight: FontWeight.w900),
                               ),
@@ -165,18 +172,17 @@ class _BodyState extends State<Body> {
                             decoration: BoxDecoration(
                               image: const DecorationImage(
                                   fit: BoxFit.cover,
-                                  opacity: 0.07,
-                                  image:
-                                      AssetImage("assets/images/busMap.jpg")),
+                                  opacity: 0.8,
+                                  image: AssetImage("assets/images/12.png")),
                               color: appPrimaryColor,
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: const Padding(
-                              padding: EdgeInsets.only(left: 20, top: 30),
+                              padding: EdgeInsets.only(left: 10, top: 95),
                               child: Text(
-                                "Account",
+                                "My Account",
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 12, 12, 12),
+                                    color: Color.fromARGB(214, 20, 20, 20),
                                     fontSize: 25,
                                     fontWeight: FontWeight.w900),
                               ),

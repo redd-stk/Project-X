@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
 import '../../../extra components/defaultButton.dart';
+import '../../otpVerificationScreen/otpverification.dart';
 
 // import '../../../size_config.dart';
 
@@ -68,9 +69,13 @@ class _SignUpFormState extends State<SignUpForm> {
             child: DefaultButton(
                 text: "Sign Up",
                 pressed: () {
-                  if (formKey.currentState!.validate()) {
-                    return;
-                  }
+                  // if (formKey.currentState!.validate()) {
+                  //   return;
+                  // }
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const OtpVerification()));
                 }),
           ),
         ],

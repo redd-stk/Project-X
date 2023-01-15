@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
+import '../../../constants.dart';
+
 class CheckboxRow extends StatefulWidget {
   @override
   _CheckboxRowState createState() => _CheckboxRowState();
 }
 
 class _CheckboxRowState extends State<CheckboxRow> {
-  bool _sendMoney = false;
+  bool _sendMoney = true;
   bool _tillNumber = false;
   bool _paybill = false;
   late String _phoneNumber;
@@ -32,7 +34,10 @@ class _CheckboxRowState extends State<CheckboxRow> {
                   });
                 },
               ),
-              Text("Send Money"),
+              const Text(
+                "Send Money",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               Checkbox(
                 value: _tillNumber,
                 onChanged: (value) {
@@ -43,7 +48,10 @@ class _CheckboxRowState extends State<CheckboxRow> {
                   });
                 },
               ),
-              Text("Till number"),
+              const Text(
+                "Till number",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               Checkbox(
                 value: _paybill,
                 onChanged: (value) {
@@ -54,7 +62,10 @@ class _CheckboxRowState extends State<CheckboxRow> {
                   });
                 },
               ),
-              Text("Paybill"),
+              const Text(
+                "Paybill",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ],
           ),
           _sendMoney
@@ -62,6 +73,16 @@ class _CheckboxRowState extends State<CheckboxRow> {
                   decoration: InputDecoration(
                     labelText: "Enter Phone Number",
                     prefixText: "+254 7",
+                    labelStyle: const TextStyle(
+                        fontSize: 17, fontWeight: FontWeight.bold),
+                    prefixStyle: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: appPrimaryColor)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: appPrimaryColor)),
                   ),
                   keyboardType: TextInputType.number,
                   maxLength: 8,
@@ -76,8 +97,21 @@ class _CheckboxRowState extends State<CheckboxRow> {
               ? Column(
                   children: <Widget>[
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
                         labelText: "Enter Paybill Number",
+                        labelStyle: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                        prefixStyle: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide:
+                                const BorderSide(color: appPrimaryColor)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide:
+                                const BorderSide(color: appPrimaryColor)),
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -85,9 +119,22 @@ class _CheckboxRowState extends State<CheckboxRow> {
                         });
                       },
                     ),
+                    const SizedBox(height: 10),
                     TextFormField(
                       decoration: InputDecoration(
                         labelText: "Enter Account Number",
+                        labelStyle: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                        prefixStyle: const TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide:
+                                const BorderSide(color: appPrimaryColor)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide:
+                                const BorderSide(color: appPrimaryColor)),
                       ),
                       onChanged: (value) {
                         setState(() {
@@ -102,6 +149,16 @@ class _CheckboxRowState extends State<CheckboxRow> {
               ? TextFormField(
                   decoration: InputDecoration(
                     labelText: "Enter Till Number",
+                    labelStyle: const TextStyle(
+                        fontSize: 17, fontWeight: FontWeight.bold),
+                    prefixStyle: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: appPrimaryColor)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
+                        borderSide: const BorderSide(color: appPrimaryColor)),
                   ),
                   keyboardType: TextInputType.number,
                   onChanged: (value) {

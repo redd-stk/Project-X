@@ -1,26 +1,53 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
-class MapScreen extends StatefulWidget {
-  const MapScreen({super.key});
-
+class MapPage extends StatefulWidget {
   @override
-  State<MapScreen> createState() => _MapScreenState();
+  _MapPageState createState() => _MapPageState();
 }
 
-class _MapScreenState extends State<MapScreen> {
-  final Completer<GoogleMapController> _controller = Completer();
+class _MapPageState extends State<MapPage> {
+  late GoogleMapController _controller;
+  Location _location = Location();
+  late LocationData _locationData;
+  late Marker _marker;
 
-  static const LatLng sourceLocation = LatLng(-0.142565, 35.946346);
+  @override
+  void initState() {
+    super.initState();
+    _location.onLocationChanged.listen((LocationData locationData) {
+      setState(() {
+        _locationData = locationData;
+        _marker = Marker(
+          markerId: MarkerId("current_location"),
+          position:
+              LatLng(locationData.latitude ?? 0, locationData.longitude ?? 0),
+          infoWindow: InfoWindow(
+            title: "Your current location",
+            snippet:
+                "Latitude: ${locationData.latitude}, Longitude: ${locationData.longitude}",
+          ),
+        );
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: GoogleMap(
-          initialCameraPosition:
-              CameraPosition(target: sourceLocation, zoom: 14.5)),
+        mapType: MapType.normal,
+        initialCameraPosition: CameraPosition(
+          target:
+              LatLng(_locationData.latitude ?? 0, _locationData.longitude ?? 0),
+          zoom: 16,
+        ),
+        markers: _locationData != null ? Set.of([_marker]) : Set(),
+        onMapCreated: (GoogleMapController controller) {
+          _controller = controller;
+        },
+      ),
     );
   }
 }

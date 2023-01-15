@@ -1,0 +1,90 @@
+In order to add a camera access permission for a Flutter app, you'll need to make changes to both the Android and iOS portions of the app.
+
+For Android:
+
+In the AndroidManifest.xml file, located in the android/app/src/main directory, add the following line inside the <manifest> tag:
+Copy code
+<uses-permission android:name="android.permission.CAMERA" />
+For iOS:
+
+In the Info.plist file, located in the ios/Runner directory, add the following keys and values:
+Copy code
+<key>NSCameraUsageDescription</key>
+<string>This app needs access to the camera to scan QR codes.</string>
+After adding the permission, you need to rebuild the app. After that, when the app is run on a device, the user will be prompted to grant permission for the app to use the camera.
+
+You should also check if the permission is granted before trying to access the camera.
+
+Copy code
+bool hasPermission = await SimplePermissions.checkPermission(Permission.Camera);
+if(!hasPermission) {
+  final res = await SimplePermissions.requestPermission(Permission.Camera);
+  hasPermission = res == PermissionStatus.authorized;
+}
+You can use the package simple_permissions to check and request for the camera permission.
+
+
+
+
+mythicalig12@gmail.com
+how do you use the package simple_permissions to check and request for the camera permission.
+The simple_permissions package makes it easy to check and request for permissions in a Flutter app. Here's an example of how you can use the package to check and request for the camera permission:
+
+In the pubspec.yaml file, add simple_permissions as a dependency:
+Copy code
+dependencies:
+  simple_permissions: ^3.0.1
+Import the package in your Dart file:
+Copy code
+import 'package:simple_permissions/simple_permissions.dart';
+Use the checkPermission method to check if the camera permission has been granted:
+Copy code
+bool hasPermission = await SimplePermissions.checkPermission(Permission.Camera);
+If the permission has not been granted, use the requestPermission method to request it:
+Copy code
+if(!hasPermission) {
+  final res = await SimplePermissions.requestPermission(Permission.Camera);
+  hasPermission = res == PermissionStatus.authorized;
+}
+If the user grants the permission, the requestPermission method will return PermissionStatus.authorized, otherwise it will return PermissionStatus.denied.
+You can also use the getPermissionStatus method to check the status of the permission
+
+Copy code
+PermissionStatus permissionStatus = await SimplePermissions.getPermissionStatus(Permission.Camera);
+This will return the status of the permission either PermissionStatus.authorized or PermissionStatus.denied.
+
+It's a good practice to check the status of the permission before using the camera.
+
+
+
+
+mythicalig12@gmail.com
+How can i use permission_hander to to check and request for the camera permission.
+The permission_handler package is another package that you can use to check and request for permissions in a Flutter app, specifically for the camera permission. Here's an example of how you can use the package to check and request for the camera permission:
+
+In the pubspec.yaml file, add permission_handler as a dependency:
+Copy code
+dependencies:
+  permission_handler: ^5.0.1+1
+Import the package in your Dart file:
+Copy code
+import 'package:permission_handler/permission_handler.dart';
+Use the check method to check if the camera permission has been granted:
+Copy code
+final status = await Permission.camera.status;
+If the permission has not been granted, use the request method to request it:
+Copy code
+if (status != PermissionStatus.granted) {
+  final result = await Permission.camera.request();
+}
+The request method will open a dialog asking the user to grant the permission. If the user grants the permission, the method will return PermissionStatus.granted, otherwise it will return PermissionStatus.denied or PermissionStatus.neverAskAgain.
+You can also use the shouldShowRequestPermissionRationale method to check if the user has previously denied the permission and you can give them more information about why you need the permission before asking them again.
+
+Copy code
+if(await Permission.camera.shouldShowRequestPermissionRationale) {
+    // show a dialog or something
+}
+It's a good practice to check the status of the permission before using the camera.
+
+
+

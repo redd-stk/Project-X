@@ -40,7 +40,10 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   flutter_svg: ^1.1.5
   google_maps_flutter: ^2.2.3
+  http: ^0.13.5
   image_picker: ^0.8.4+11
+  location: ^4.4.0
+  permission_handler: ^10.2.0
   qr_code_scanner: ^1.0.1
 
 dev_dependencies:
