@@ -13,7 +13,7 @@ const headingStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const googleApiKey = "AIzaSyBVy1HLRClXnGjKLL-ja-cqwY9T_U85yQY";
+const googleApiKey = "AIzaSyD3BXnCXhtKAlIikVzy-g87xwI-2HJuW0M";
 const sourceLocation = LatLng(-0.142565, 35.946346);
 
 // ----------------------------------------------------------

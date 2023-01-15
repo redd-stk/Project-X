@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/extra%20components/defaultButton.dart';
-import 'package:project_x/screens/PaymentScreen/components/Payment2.dart';
 import 'package:project_x/screens/PaymentScreen/components/QRScanScreen.dart';
-import 'package:project_x/screens/homeScreen/homeScreen.dart';
 
 import '../../constants.dart';
 import 'components/paymentOptions.dart';
@@ -17,6 +15,9 @@ class QRScanScreen1 extends StatefulWidget {
 class _QRScanScreenState1 extends State<QRScanScreen1> {
   var _paymentDetails = '';
 
+  final formKey2 = GlobalKey<FormState>();
+  late String amount;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,16 +30,16 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                 Column(
                   children: [
                     Container(
-                      height: 250,
+                      height: 215,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: Color.fromARGB(255, 190, 190, 190)),
                       child: SizedBox(
-                        height: 250,
+                        height: 215,
                         width: double.infinity,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 70),
+                          padding: const EdgeInsets.only(top: 50),
                           child: Column(
                             children: [
                               TextButton(
@@ -60,13 +61,15 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                                   children: const [
                                     Icon(
                                       Icons.photo_camera,
-                                      size: 70,
+                                      size: 65,
+                                      color: appPrimaryColor,
                                     ),
-                                    SizedBox(height: 20),
+                                    SizedBox(height: 15),
                                     Text(
-                                      "Scan QR Code",
+                                      "Scan QR Code \n to capture pament details",
+                                      textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           color:
                                               Color.fromARGB(255, 44, 43, 43)),
@@ -95,6 +98,35 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                       child: Text(_paymentDetails),
                     ),
                     const SizedBox(height: 10),
+                    Form(
+                      key: formKey2,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          contentPadding:
+                              EdgeInsets.only(top: 8, bottom: 8, left: 20),
+                          labelText: "Enter amount to pay",
+                          labelStyle: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                          prefixStyle: const TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide:
+                                  const BorderSide(color: appPrimaryColor)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                              borderSide:
+                                  const BorderSide(color: appPrimaryColor)),
+                        ),
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          setState(() {
+                            amount = value;
+                          });
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                     const Text(
                       "Or \nEnter Details Manually",
                       textAlign: TextAlign.center,

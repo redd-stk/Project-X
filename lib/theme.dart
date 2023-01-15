@@ -8,7 +8,7 @@ ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
     fontFamily: "Muli",
-    appBarTheme: appBarTheme(),
+    // appBarTheme: appBarTheme(),
     textTheme: TextTheme(
       bodyText1: TextStyle(color: appTextColor),
       bodyText2: TextStyle(color: appTextColor),
@@ -21,7 +21,10 @@ AppBarTheme appBarTheme() {
   return AppBarTheme(
     color: Colors.white,
     elevation: 0,
-    systemOverlayStyle: SystemUiOverlayStyle.light,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Color.fromARGB(197, 219, 219, 219),
+      statusBarIconBrightness: Brightness.dark,
+    ),
     iconTheme: IconThemeData(color: Colors.black),
     titleTextStyle: TextStyle(
       fontSize: 22,

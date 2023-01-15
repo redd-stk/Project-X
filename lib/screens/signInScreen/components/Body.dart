@@ -3,6 +3,7 @@ import 'package:project_x/screens/signUpScreen/SignUpScreen.dart';
 
 import '../../../constants.dart';
 import '../../../extra components/defaultButton.dart';
+import '../../otpVerificationScreen/otpverification.dart';
 import 'SignInForm.dart';
 
 class Body extends StatelessWidget {
@@ -68,7 +69,14 @@ class Body extends StatelessWidget {
               const SizedBox(height: 25),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 78),
-                child: DefaultButton(text: "Sign In", pressed: () {}),
+                child: DefaultButton(
+                    text: "Sign In",
+                    pressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const OtpVerification()));
+                    }),
               ),
               const SizedBox(height: 30),
               const NoAccountText(),

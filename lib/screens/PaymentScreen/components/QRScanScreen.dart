@@ -17,40 +17,50 @@ class _QrCodeScanScreen2State extends State<QrCodeScanScreen2> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.close),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: _torchEnabled ? Icon(Icons.flash_on) : Icon(Icons.flash_off),
-            onPressed: () async {
-              try {
-                _torchEnabled = !_torchEnabled;
-                await _controller.toggleFlash();
-                setState(() {});
-              } on PlatformException catch (e) {
-                _torchEnabled = false;
-                setState(() {});
-              }
-            },
+      body: Stack(
+        children: <Widget>[
+          QRView(
+            key: GlobalKey(debugLabel: 'QR'),
+            onQRViewCreated: _onQRViewCreated,
+            cameraFacing: CameraFacing.back,
+            overlay: QrScannerOverlayShape(
+              borderColor: Color.fromARGB(255, 207, 14, 0),
+              borderRadius: 10,
+              borderLength: 30,
+              borderWidth: 10,
+              cutOutSize: 300,
+            ),
+          ),
+          Positioned(
+            top: 50,
+            left: 30,
+            child: IconButton(
+              icon: Icon(Icons.close, color: Colors.white, size: 37),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Positioned(
+            top: 50,
+            right: 30,
+            child: IconButton(
+              icon: _torchEnabled
+                  ? Icon(Icons.flash_on, color: Colors.white, size: 37)
+                  : Icon(Icons.flash_off, color: Colors.white, size: 37),
+              onPressed: () async {
+                try {
+                  _torchEnabled = !_torchEnabled;
+                  await _controller.toggleFlash();
+                  setState(() {});
+                } on PlatformException catch (e) {
+                  _torchEnabled = false;
+                  setState(() {});
+                }
+              },
+            ),
           ),
         ],
-      ),
-      body: QRView(
-        key: GlobalKey(debugLabel: 'QR'),
-        onQRViewCreated: _onQRViewCreated,
-        cameraFacing: CameraFacing.back,
-        overlay: QrScannerOverlayShape(
-          borderColor: Color.fromARGB(255, 207, 14, 0),
-          borderRadius: 10,
-          borderLength: 30,
-          borderWidth: 10,
-          cutOutSize: 300,
-        ),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_x/screens/PaymentScreen/paymentScreen.dart';
 import '../../../constants.dart';
 import '../../locationSearchScreen/locationSearchScreen.dart';
+import '../../mapScreen/mapScreen.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -138,7 +139,12 @@ class _BodyState extends State<Body> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MapScreen()));
+                          },
                           child: Container(
                             height: 130,
                             width: 170,
