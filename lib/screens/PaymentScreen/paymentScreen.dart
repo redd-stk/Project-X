@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:project_x/extra%20components/defaultButton.dart';
 import 'package:project_x/screens/PaymentScreen/components/QRScanScreen.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants.dart';
+import '../../main.dart';
 import 'components/paymentOptions.dart';
 
 class QRScanScreen1 extends StatefulWidget {
@@ -12,29 +13,38 @@ class QRScanScreen1 extends StatefulWidget {
   State<QRScanScreen1> createState() => _QRScanScreenState1();
 }
 
-class _QRScanScreenState1 extends State<QRScanScreen1> {
-  var _paymentDetails = '';
+final _paymentDetailsController = TextEditingController();
 
-  final formKey2 = GlobalKey<FormState>();
-  late String amount;
+class _QRScanScreenState1 extends State<QRScanScreen1> {
+  // var _paymentDetails = '';
+  @override
+  void initState() {
+    super.initState();
+    final paymentProvider =
+        Provider.of<PaymentProvider>(context, listen: false);
+    _paymentDetailsController.text = paymentProvider.paymentDetails;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final paymentProvider = Provider.of<PaymentProvider>(context);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding:
+                const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
             child: Stack(
               children: [
                 Column(
                   children: [
                     Container(
-                      height: 215,
+                      height: 220,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
-                          color: Color.fromARGB(255, 190, 190, 190)),
+                          color: const Color.fromARGB(255, 190, 190, 190)),
                       child: SizedBox(
                         height: 215,
                         width: double.infinity,
@@ -45,17 +55,11 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                               TextButton(
                                 onPressed: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => QrCodeScanScreen2(),
-                                    ),
-                                  ).then((value) {
-                                    if (value != null) {
-                                      setState(() {
-                                        _paymentDetails = value;
-                                      });
-                                    }
-                                  });
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const QrCodeScanScreen2(),
+                                      ));
                                 },
                                 child: Column(
                                   children: const [
@@ -93,61 +97,50 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                       height: 55,
                       width: 400,
                       decoration: BoxDecoration(
-                          color: appPrimaryColor,
+                          color: Color.fromARGB(255, 190, 190, 190),
                           borderRadius: BorderRadius.circular(15)),
-                      child: Text(_paymentDetails),
-                    ),
-                    const SizedBox(height: 10),
-                    Form(
-                      key: formKey2,
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.only(top: 8, bottom: 8, left: 20),
-                          labelText: "Enter amount to pay",
-                          labelStyle: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                          prefixStyle: const TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: appPrimaryColor)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: appPrimaryColor)),
-                        ),
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {
-                          setState(() {
-                            amount = value;
-                          });
+                      child: FutureBuilder(
+                        future: Future.delayed(Duration.zero),
+                        builder: (context, snapshot) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 15),
+                            child: TextFormField(
+                              initialValue:
+                                  "!! Payment details not available for now !!",
+                              style: TextStyle(fontSize: 14, color: Colors.red),
+                              enabled: true,
+                            ),
+                          );
                         },
                       ),
+
+                      // TextFormField(
+                      //   //TODO Fix the error initial value == null || controller ==null : is not true error. Issues to do with returning null payment details
+                      //   // controller: _paymentDetailsController,
+                      //   // initialValue: paymentProvider.paymentDetails,
+                      //   initialValue: "Payment details not available",
+                      //   enabled: false,
+                      // ),
                     ),
                     const SizedBox(height: 20),
                     const Text(
                       "Or \nEnter Details Manually",
                       textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14.5,
+                          color: appPrimaryColor),
                     ),
                     const SizedBox(height: 5),
-                    CheckboxRow(),
-                    const SizedBox(height: 25),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 90),
-                      child:
-                          DefaultButton(text: "Make Payment", pressed: () {}),
-                    ),
-                    const SizedBox(height: 20),
+                    const CheckboxRow(),
+                    const SizedBox(height: 15),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 105),
                       child: Container(
                         height: 45,
                         decoration: BoxDecoration(
-                            color: Color.fromARGB(215, 245, 245, 245),
+                            color: const Color.fromARGB(215, 245, 245, 245),
                             borderRadius: BorderRadius.circular(10)),
                         child: TextButton(
                             onPressed: () {
@@ -179,5 +172,11 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _paymentDetailsController.dispose();
+    super.dispose();
   }
 }

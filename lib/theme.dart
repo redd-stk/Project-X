@@ -33,3 +33,17 @@ AppBarTheme appBarTheme() {
     ),
   );
 }
+
+InputDecoration inputDeco(labeltext) {
+  return InputDecoration(
+    contentPadding: const EdgeInsets.only(top: 8, bottom: 8, left: 20),
+    labelText: labeltext,
+    labelStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+    enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: const BorderSide(color: appPrimaryColor)),
+    focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(15),
+        borderSide: const BorderSide(color: appPrimaryColor)),
+  );
+}

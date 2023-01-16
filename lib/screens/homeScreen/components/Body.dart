@@ -3,6 +3,7 @@ import 'package:project_x/screens/PaymentScreen/paymentScreen.dart';
 import '../../../constants.dart';
 import '../../locationSearchScreen/locationSearchScreen.dart';
 import '../../mapScreen/mapScreen.dart';
+import '../../paymentSuccessfulScreen/paymentSuccessful.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -143,7 +144,7 @@ class _BodyState extends State<Body> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => MapScreen()));
+                                    builder: (context) => const MapScreen()));
                           },
                           child: Container(
                             height: 130,
@@ -170,7 +171,12 @@ class _BodyState extends State<Body> {
                           ),
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PaymentSuccessful()));
+                          },
                           child: Container(
                             height: 130,
                             width: 170,

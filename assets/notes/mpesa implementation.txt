@@ -1,0 +1,46 @@
+Here are the general steps to implement the Daraja MPESA API in a Flutter app:
+
+Register for a developer account on the MPESA Daraja website and create an app to get your consumer key and consumer secret.
+
+Add the http package to your pubspec.yaml file to handle the network requests.
+
+Use the consumer key and consumer secret to generate an access token by making a POST request to the /oauth/v1/generate endpoint.
+
+Use the access token to make requests to the other endpoints such as C2B, B2C, B2B, reversal, and account balance.
+
+Create a model class to parse the response data returned by the API.
+
+Create a service class that makes the requests to the MPESA API using the http package.
+
+Use the FutureBuilder widget to handle the response data and display it in the UI.
+
+Implement the necessary validations and error handling in the service class and UI.
+
+Here is an example of how you can use the http package to make a request to the MPESA API to generate an access token:
+
+Copy code
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
+class MpesaService {
+  final String _baseUrl = 'https://sandbox.safaricom.co.ke';
+  final String _consumerKey = 'your_consumer_key';
+  final String _consumerSecret = 'your_consumer_secret';
+
+  Future<String> generateAccessToken() async {
+    final response = await http.get('$_baseUrl/oauth/v1/generate?grant_type=client_credentials',
+    headers: {
+        'Authorization': 'Basic ${base64Encode(utf8.encode('$_consumerKey:$_consumerSecret'))}'
+    });
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      final accessToken = data['access_token'];
+      return accessToken;
+    } else {
+      print(response.statusCode);
+      throw response.body;
+    }
+  }
+}
+Please note that, this is just an example, and you'll need to adjust the code to fit your specific use case and also, you need to use live endpoint and keys on production.

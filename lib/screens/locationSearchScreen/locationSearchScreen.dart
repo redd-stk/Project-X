@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:project_x/extra%20components/defaultButton.dart';
-import 'package:project_x/extra%20components/gMaps.dart';
+import 'package:project_x/screens/mapScreen/mapScreen.dart';
 
 import '../../constants.dart';
 import '../PaymentScreen/paymentScreen.dart';
@@ -21,7 +20,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
   bool cash = false;
   late String _mpesaNumber;
 
-  static const LatLng mySourceLocation = LatLng(-0.142565, 35.946346);
+  // static const LatLng mySourceLocation = LatLng(-0.142565, 35.946346);
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +67,9 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               child: Container(
                 height: 200,
                 width: 375,
-                decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 211, 210, 210)),
-                child: gMap(mySourceLocation),
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(255, 211, 210, 210)),
+                child: GMaps.gMap(),
               ),
             ),
             Form(
@@ -82,11 +81,11 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                   decoration: InputDecoration(
                       hintText: "Search your destination location",
                       prefixIcon: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 12),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
                         child: SvgPicture.asset(
                           "assets/icons/location.svg",
                           height: 16,
-                          color: Color.fromARGB(255, 143, 141, 141),
+                          color: const Color.fromARGB(255, 143, 141, 141),
                         ),
                       )),
                 ),
@@ -134,7 +133,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                   color: appPrimaryColor),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(children: <Widget>[
                 Checkbox(
                   value: mPesa,
@@ -173,8 +172,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                       children: [
                         TextFormField(
                           decoration: InputDecoration(
-                            contentPadding:
-                                EdgeInsets.only(top: 9, bottom: 9, left: 20),
+                            contentPadding: const EdgeInsets.only(
+                                top: 9, bottom: 9, left: 20),
                             labelText: "Enter Your Mpesa Number",
                             labelStyle: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.w600),
@@ -218,11 +217,12 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
             cash
                 ? Column(
                     children: [
-                      const Text("Ensure you pay your cash before alighting",
+                      const Text(
+                          "!! Ensure you pay your cash before alighting !!",
                           style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.red,
-                              fontWeight: FontWeight.w600)),
+                            fontSize: 16,
+                            color: Colors.red,
+                          )),
                       Padding(
                         padding: const EdgeInsets.only(
                             left: 100, right: 100, top: 35, bottom: 10),
@@ -246,7 +246,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
       child: ElevatedButton(
         onPressed: () {},
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           backgroundColor: secondaryColor10LightTheme,
           foregroundColor: appPrimaryColor,
           elevation: 0,
@@ -256,7 +256,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           ),
         ),
         child: Text(location,
-            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
       ),
     );
   }

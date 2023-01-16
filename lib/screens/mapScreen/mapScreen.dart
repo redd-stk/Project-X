@@ -1,9 +1,7 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../../extra components/gMaps.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -13,14 +11,65 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  final Completer<GoogleMapController> _controller = Completer();
-
-  static const LatLng mySourceLocation = LatLng(-0.142565, 35.946346);
+  @override
+  void initState() {
+    super.initState();
+    GMaps.getCurrentLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: gMap(mySourceLocation),
+      body: GMaps.gMap(),
+    );
+  }
+
+  @override
+  void dispose() {
+    GMaps.mapController.dispose();
+    super.dispose();
+  }
+}
+
+class GMaps {
+  static late GoogleMapController mapController; //declare 'mapController' here
+  static LatLng mySourceLocation = LatLng(-0.303099, 36.080025);
+  static Geolocator geolocator = Geolocator();
+
+  static Future<void> getCurrentLocation() async {
+    Position position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    var status = await Permission.location.status;
+    if (status.isGranted) {
+      position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+    } else {
+      var requestStatus = await Permission.location.request();
+      if (requestStatus.isGranted) {
+        position = await Geolocator.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high);
+      }
+    }
+
+    mySourceLocation = LatLng(position.latitude, position.longitude);
+  }
+
+  static GoogleMap gMap() {
+    GMaps.getCurrentLocation();
+    return GoogleMap(
+      initialCameraPosition:
+          CameraPosition(target: mySourceLocation, zoom: 15.5),
+      markers: {
+        Marker(
+          draggable: true,
+          markerId: const MarkerId("Current Location"),
+          position: mySourceLocation,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        )
+      },
+      onMapCreated: (GoogleMapController controller) {
+        mapController = controller; //initialize 'mapController' here
+      },
     );
   }
 }

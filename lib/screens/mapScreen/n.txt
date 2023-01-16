@@ -1,0 +1,17 @@
+static GoogleMap gMap() {
+    GMaps.getCurrentLocation();
+    return GoogleMap(
+      initialCameraPosition: CameraPosition(target: mySourceLocation, zoom: 15),
+      markers: {
+        Marker(
+          draggable: true,
+          markerId: const MarkerId("Current Location"),
+          position: mySourceLocation,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        )
+      },
+      onMapCreated: (GoogleMapController controller) {
+        mapController = controller; 
+      },
+    );
+  }

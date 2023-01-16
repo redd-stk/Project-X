@@ -13,12 +13,12 @@ class OtpVerification extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        systemOverlayStyle: SystemUiOverlayStyle(
+        systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Color.fromARGB(197, 219, 219, 219),
           statusBarIconBrightness: Brightness.dark,
         ),
-        iconTheme: IconThemeData(color: Colors.black),
-        titleTextStyle: TextStyle(
+        iconTheme: const IconThemeData(color: Colors.black),
+        titleTextStyle: const TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
           color: appPrimaryColor,

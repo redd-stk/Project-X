@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../../../extra components/defaultButton.dart';
+import '../../../theme.dart';
 
 class CheckboxRow extends StatefulWidget {
+  const CheckboxRow({super.key});
+
   @override
   _CheckboxRowState createState() => _CheckboxRowState();
 }
@@ -11,12 +15,19 @@ class _CheckboxRowState extends State<CheckboxRow> {
   bool _sendMoney = true;
   bool _tillNumber = false;
   bool _paybill = false;
+  bool hasError = false;
+
+  final _paybillTextController = TextEditingController();
+  final _accountNumberTextController = TextEditingController();
+  final _phoneNumberTextController = TextEditingController();
+  final _tillNumberTextController = TextEditingController();
 
   final formKey3 = GlobalKey<FormState>();
-  late String _phoneNumber;
-  late String _paybillNumber;
-  late String _accountNumber;
-  late String _tillNumberInput;
+  String _phoneNumber = '';
+  String _paybillNumber = '';
+  String _accountNumber = '';
+  String _tillNumberInput = '';
+  String amount = '';
 
   @override
   Widget build(BuildContext context) {
@@ -73,30 +84,38 @@ class _CheckboxRowState extends State<CheckboxRow> {
               ],
             ),
             _sendMoney
-                ? TextFormField(
-                    decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.only(top: 8, bottom: 8, left: 20),
-                      labelText: "Enter Phone Number",
-                      prefixText: "+254 7",
-                      labelStyle: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold),
-                      prefixStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(color: appPrimaryColor)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(color: appPrimaryColor)),
-                    ),
-                    keyboardType: TextInputType.number,
-                    maxLength: 8,
-                    onChanged: (value) {
-                      setState(() {
-                        _phoneNumber = value;
-                      });
-                    },
+                ? Column(
+                    children: <Widget>[
+                      TextFormField(
+                        // enabled: _paymentDetails == null ? true : false,
+                        controller: _phoneNumberTextController,
+                        decoration: inputDeco("Enter Phone Number"),
+                        keyboardType: TextInputType.number,
+                        maxLength: 10,
+                        onChanged: (value) {
+                          setState(() {
+                            _phoneNumber = value;
+                            if (_phoneNumber.isEmpty ||
+                                _phoneNumber.length < 10) {
+                              hasError = true;
+                            } else {
+                              hasError = false;
+                            }
+                          });
+                        },
+                      ),
+                      Visibility(
+                        visible:
+                            _phoneNumber.isEmpty || _phoneNumber.length < 10,
+                        child: _phoneNumber.isEmpty
+                            ? const Text("Phone Number cannot be empty",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 38, 23)))
+                            : const Text("Enter a valid phone number",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 38, 23))),
+                      )
+                    ],
                   )
                 : Container(),
             _paybill
@@ -104,82 +123,105 @@ class _CheckboxRowState extends State<CheckboxRow> {
                     children: <Widget>[
                       TextFormField(
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.only(top: 8, bottom: 8, left: 20),
-                          labelText: "Enter Paybill Number",
-                          labelStyle: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                          prefixStyle: const TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: appPrimaryColor)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: appPrimaryColor)),
-                        ),
+                        decoration: inputDeco("Enter Paybill Number"),
                         onChanged: (value) {
                           setState(() {
                             _paybillNumber = value;
+                            if (_paybillNumber.isEmpty ||
+                                _accountNumber.isEmpty) {
+                              hasError = true;
+                            } else {
+                              hasError = false;
+                            }
                           });
                         },
                       ),
                       const SizedBox(height: 10),
                       TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding:
-                              EdgeInsets.only(top: 8, bottom: 8, left: 20),
-                          labelText: "Enter Account Number",
-                          labelStyle: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
-                          prefixStyle: const TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.bold),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: appPrimaryColor)),
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide:
-                                  const BorderSide(color: appPrimaryColor)),
-                        ),
+                        decoration: inputDeco("Enter Account Number"),
                         onChanged: (value) {
                           setState(() {
                             _accountNumber = value;
+                            if (_paybillNumber.isEmpty ||
+                                _accountNumber.isEmpty) {
+                              hasError = true;
+                            } else {
+                              hasError = false;
+                            }
                           });
                         },
+                      ),
+                      Visibility(
+                        visible:
+                            _paybillNumber.isEmpty || _accountNumber.isEmpty,
+                        child: Column(
+                          children: [
+                            if (_paybillNumber.isEmpty)
+                              const Text("Paybill Number cannot be empty",
+                                  style: TextStyle(color: Colors.red)),
+                            if (_accountNumber.isEmpty)
+                              const Text("Account Number cannot be empty",
+                                  style: TextStyle(color: Colors.red))
+                          ],
+                        ),
                       ),
                     ],
                   )
                 : Container(),
             _tillNumber
-                ? TextFormField(
-                    decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.only(top: 8, bottom: 8, left: 20),
-                      labelText: "Enter Till Number",
-                      labelStyle: const TextStyle(
-                          fontSize: 14, fontWeight: FontWeight.bold),
-                      prefixStyle: const TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(color: appPrimaryColor)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: const BorderSide(color: appPrimaryColor)),
-                    ),
-                    keyboardType: TextInputType.number,
-                    onChanged: (value) {
-                      setState(() {
-                        _tillNumberInput = value;
-                      });
-                    },
+                ? Column(
+                    children: [
+                      TextFormField(
+                        decoration: inputDeco("Enter Till Number"),
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {
+                          setState(() {
+                            _tillNumberInput = value;
+                            if (_tillNumberInput.isEmpty) {
+                              hasError = true;
+                            } else {
+                              hasError = false;
+                            }
+                          });
+                        },
+                      ),
+                      Visibility(
+                        visible: _tillNumberInput.isEmpty,
+                        child: const Text("Till Number value cannot be empty",
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 255, 38, 23))),
+                      ),
+                    ],
                   )
                 : Container(),
+            const SizedBox(height: 10),
+            TextFormField(
+              decoration: inputDeco("Enter amount to pay"),
+              keyboardType: TextInputType.number,
+              onChanged: (value) {
+                setState(() {
+                  amount = value;
+                });
+              },
+            ),
+            Visibility(
+              visible: amount.isEmpty,
+              child: const Text("Amount to pay cannot be empty",
+                  style: TextStyle(color: Color.fromARGB(255, 255, 38, 23))),
+            ),
+            SizedBox(height: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 90),
+              child: DefaultButton(
+                  text: "Make Payment",
+                  pressed: () {
+                    if (hasError = true) {
+                      return;
+                    } else {
+                      //TODO Add navigation to payment successful
+                    }
+                  }),
+            ),
           ],
         ),
       ),
