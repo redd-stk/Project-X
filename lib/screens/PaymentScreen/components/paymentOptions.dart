@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_x/screens/paymentSuccessfulScreen/paymentSuccessful.dart';
 
-import '../../../constants.dart';
 import '../../../extra components/defaultButton.dart';
 import '../../../theme.dart';
 
@@ -110,6 +110,7 @@ class _CheckboxRowState extends State<CheckboxRow> {
                         child: _phoneNumber.isEmpty
                             ? const Text("Phone Number cannot be empty",
                                 style: TextStyle(
+                                    fontSize: 13.5,
                                     color: Color.fromARGB(255, 255, 38, 23)))
                             : const Text("Enter a valid phone number",
                                 style: TextStyle(
@@ -158,10 +159,12 @@ class _CheckboxRowState extends State<CheckboxRow> {
                           children: [
                             if (_paybillNumber.isEmpty)
                               const Text("Paybill Number cannot be empty",
-                                  style: TextStyle(color: Colors.red)),
+                                  style: TextStyle(
+                                      fontSize: 13.5, color: Colors.red)),
                             if (_accountNumber.isEmpty)
                               const Text("Account Number cannot be empty",
-                                  style: TextStyle(color: Colors.red))
+                                  style: TextStyle(
+                                      fontSize: 13.5, color: Colors.red))
                           ],
                         ),
                       ),
@@ -189,6 +192,7 @@ class _CheckboxRowState extends State<CheckboxRow> {
                         visible: _tillNumberInput.isEmpty,
                         child: const Text("Till Number value cannot be empty",
                             style: TextStyle(
+                                fontSize: 13.5,
                                 color: Color.fromARGB(255, 255, 38, 23))),
                       ),
                     ],
@@ -207,7 +211,8 @@ class _CheckboxRowState extends State<CheckboxRow> {
             Visibility(
               visible: amount.isEmpty,
               child: const Text("Amount to pay cannot be empty",
-                  style: TextStyle(color: Color.fromARGB(255, 255, 38, 23))),
+                  style: TextStyle(
+                      fontSize: 13.5, color: Color.fromARGB(255, 255, 38, 23))),
             ),
             SizedBox(height: 15),
             Padding(
@@ -215,11 +220,15 @@ class _CheckboxRowState extends State<CheckboxRow> {
               child: DefaultButton(
                   text: "Make Payment",
                   pressed: () {
-                    if (hasError = true) {
-                      return;
-                    } else {
-                      //TODO Add navigation to payment successful
-                    }
+                    // if (hasError = true) {
+                    //   return;
+                    // } else {
+                    //   //TODO Add navigation to payment successful
+                    // }
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PaymentSuccessful()));
                   }),
             ),
           ],

@@ -14,7 +14,7 @@ class _MapScreenState extends State<MapScreen> {
   @override
   void initState() {
     super.initState();
-    GMaps.getCurrentLocation();
+    _checkLocationPermissionAndGetCurrentLocation();
   }
 
   @override
@@ -28,6 +28,18 @@ class _MapScreenState extends State<MapScreen> {
   void dispose() {
     GMaps.mapController.dispose();
     super.dispose();
+  }
+
+  void _checkLocationPermissionAndGetCurrentLocation() async {
+    var status = await Permission.location.status;
+    if (status.isGranted) {
+      GMaps.getCurrentLocation();
+    } else {
+      var requestStatus = await Permission.location.request();
+      if (requestStatus.isGranted) {
+        GMaps.getCurrentLocation();
+      }
+    }
   }
 }
 

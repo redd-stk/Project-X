@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_x/screens/AcccountDetailsScreen/accountDetails.dart';
 import 'package:project_x/screens/PaymentScreen/paymentScreen.dart';
 import '../../../constants.dart';
 import '../../locationSearchScreen/locationSearchScreen.dart';
@@ -175,7 +176,7 @@ class _BodyState extends State<Body> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PaymentSuccessful()));
+                                    builder: (context) => AccountScreen()));
                           },
                           child: Container(
                             height: 130,
