@@ -1,0 +1,88 @@
+final List<Transaction> transactions = [
+    Transaction(
+      name: "John Doe",
+      destination: "Paybill 1234",
+      amount: 100,
+      time: "10:00 AM",
+      date: "01/01/2022",
+    ),
+    Transaction(
+      name: "Jane Smith",
+      destination: "Tillnumber 5678",
+      amount: 200,
+      time: "11:00 AM",
+      date: "01/01/2022",
+    ),
+    Transaction(
+        name: "Mike Johnson",
+        destination: "Paybill 1234",
+        amount: 50,
+        time: "12:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "Jessica Williams",
+        destination: "Tillnumber 5678",
+        amount: 75,
+        time: "1:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "James Brown",
+        destination: "Paybill 1234",
+        amount: 125,
+        time: "2:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "Mary Jones",
+        destination: "Tillnumber 5678",
+        amount: 150,
+        time: "3:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "David Garcia",
+        destination: "Paybill 1234",
+        amount: 175,
+        time: "4:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "Maria Rodriguez",
+        destination: "Tillnumber 5678",
+        amount: 200,
+        time: "5:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "William Martinez",
+        destination: "Paybill 1234",
+        amount: 225,
+        time: "6:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "Elizabeth Taylor",
+        destination: "Tillnumber 5678",
+        amount: 250,
+        time: "7:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "Richard Hernandez",
+        destination: "Paybill 1234",
+        amount: 275,
+        time: "8:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "Samantha Perez",
+        destination: "Tillnumber 5678",
+        amount: 300,
+        time: "9:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "Richard Hernandez",
+        destination: "Paybill 1234",
+        amount: 275,
+        time: "8:00 PM",
+        date: "01/01/2022"),
+    Transaction(
+        name: "Samantha Perez",
+        destination: "Tillnumber 5678",
+        amount: 300,
+        time: "9:00 PM",
+        date: "01/01/2022"),
+  ]; 

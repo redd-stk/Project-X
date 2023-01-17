@@ -162,7 +162,7 @@ class AccountScreen extends StatelessWidget {
                   const Divider(
                     thickness: 1,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   TextButton(
