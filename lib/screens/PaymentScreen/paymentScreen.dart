@@ -97,7 +97,7 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                       height: 55,
                       width: 400,
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 190, 190, 190),
+                          color: const Color.fromARGB(255, 190, 190, 190),
                           borderRadius: BorderRadius.circular(15)),
                       child: FutureBuilder(
                         future: Future.delayed(Duration.zero),
@@ -108,7 +108,8 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                             child: TextFormField(
                               initialValue:
                                   "!! Payment details not available for now !!",
-                              style: TextStyle(fontSize: 14, color: Colors.red),
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.red),
                               enabled: true,
                             ),
                           );

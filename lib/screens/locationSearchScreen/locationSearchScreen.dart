@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:project_x/extra%20components/defaultButton.dart';
 import 'package:project_x/screens/mapScreen/mapScreen.dart';
 
@@ -14,6 +15,18 @@ class SearchLocationScreen extends StatefulWidget {
   @override
   State<SearchLocationScreen> createState() => _SearchLocationScreenState();
 }
+
+// void _checkLocationPermissionAndGetCurrentLocation() async {
+//   var status = await Permission.location.status;
+//   if (!status.isGranted) {
+//     // GMaps.getCurrentLocation();
+//     var requestStatus = await Permission.location.request();
+//     if (!requestStatus.isGranted) {
+//       // GMaps.getCurrentLocation();
+//       SnackBar(content: Text("Please enable location permission for the app"));
+//     }
+//   }
+// }
 
 class _SearchLocationScreenState extends State<SearchLocationScreen> {
   bool mPesa = true;
@@ -42,6 +55,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           icon: const Icon(Icons.arrow_back_ios,
               color: Color.fromARGB(255, 95, 94, 94)),
           onPressed: () {
+            // _checkLocationPermissionAndGetCurrentLocation();
             Navigator.of(context).pop();
           },
         ),

@@ -24,8 +24,19 @@ class HomeScreen extends StatelessWidget {
           fontWeight: FontWeight.bold,
           color: appPrimaryColor,
         ),
-        // backgroundColor: Color.fromARGB(218, 255, 255, 255),
-        title: const Text('Hello "User"'),
+        title: Column(
+          children: const [
+            Text('Hello "User"'),
+            SizedBox(height: 7),
+            Text(
+              "logged in as passenger/operator",
+              style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromARGB(255, 100, 99, 99)),
+            )
+          ],
+        ),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),

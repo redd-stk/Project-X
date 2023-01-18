@@ -179,9 +179,9 @@ class _PaymentsListScreenState extends State<PaymentsListScreen> {
                             DataCell(
                               Container(
                                 color: selectedRows.contains(txn)
-                                    ? Color.fromARGB(255, 248, 150, 150)
+                                    ? const Color.fromARGB(255, 248, 150, 150)
                                     : null,
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: Text(
                                   txn.name,
                                   style: const TextStyle(
@@ -192,18 +192,18 @@ class _PaymentsListScreenState extends State<PaymentsListScreen> {
                             DataCell(
                               Container(
                                 color: selectedRows.contains(txn)
-                                    ? Color.fromARGB(255, 248, 150, 150)
+                                    ? const Color.fromARGB(255, 248, 150, 150)
                                     : null,
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: Text(txn.destination),
                               ),
                             ),
                             DataCell(
                               Container(
                                 color: selectedRows.contains(txn)
-                                    ? Color.fromARGB(255, 248, 150, 150)
+                                    ? const Color.fromARGB(255, 248, 150, 150)
                                     : null,
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: Text("Kshs. ${txn.amount}",
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -214,18 +214,18 @@ class _PaymentsListScreenState extends State<PaymentsListScreen> {
                             DataCell(
                               Container(
                                 color: selectedRows.contains(txn)
-                                    ? Color.fromARGB(255, 248, 150, 150)
+                                    ? const Color.fromARGB(255, 248, 150, 150)
                                     : null,
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: Text(txn.time),
                               ),
                             ),
                             DataCell(
                               Container(
                                 color: selectedRows.contains(txn)
-                                    ? Color.fromARGB(255, 248, 150, 150)
+                                    ? const Color.fromARGB(255, 248, 150, 150)
                                     : null,
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 child: Text(txn.date),
                               ),
                             ),

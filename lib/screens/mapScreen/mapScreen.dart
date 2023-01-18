@@ -44,9 +44,12 @@ class _MapScreenState extends State<MapScreen> {
 }
 
 class GMaps {
-  static late GoogleMapController mapController; //declare 'mapController' here
-  static LatLng mySourceLocation = LatLng(-0.303099, 36.080025);
+  static late GoogleMapController mapController;
+  static LatLng mySourceLocation = const LatLng(-0.303099, 36.080025);
+  static LatLng destinationLocation = const LatLng(-0.300199, 36.090025);
   static Geolocator geolocator = Geolocator();
+
+  List<LatLng> polylineCoordinates = [];
 
   static Future<void> getCurrentLocation() async {
     Position position = await Geolocator.getCurrentPosition(
@@ -77,10 +80,16 @@ class GMaps {
           markerId: const MarkerId("Current Location"),
           position: mySourceLocation,
           icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
+        ),
+        Marker(
+          draggable: true,
+          markerId: const MarkerId("Current Location"),
+          position: destinationLocation,
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
         )
       },
       onMapCreated: (GoogleMapController controller) {
-        mapController = controller; //initialize 'mapController' here
+        mapController = controller;
       },
     );
   }

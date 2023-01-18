@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:project_x/extra%20components/defaultButton.dart';
 import 'package:project_x/screens/homeScreen/homeScreen.dart';
 
 class PaymentSuccessful extends StatelessWidget {
   final String destination = "Kabu Main Gate";
   final amount = " 100";
+  final String transactionCode = "OAXMLKNZG12";
 
   PaymentSuccessful({super.key});
 
@@ -29,6 +29,14 @@ class PaymentSuccessful extends StatelessWidget {
                 color: Color.fromARGB(255, 53, 53, 53)),
           ),
           const SizedBox(height: 20.0),
+          Text(
+            "Transaction Code: $transactionCode",
+            style: const TextStyle(
+                fontSize: 14.0,
+                color: Color.fromARGB(255, 52, 52, 54),
+                fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10.0),
           Text(
             "Date: ${DateTime.now().toString().substring(0, 16)} ${DateFormat.jm().format(DateTime.now())}",
             style: const TextStyle(

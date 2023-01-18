@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:project_x/screens/AcccountDetailsScreen/accountDetails.dart';
@@ -6,6 +7,7 @@ import 'package:project_x/screens/PaymentScreen/paymentScreen.dart';
 import '../../../constants.dart';
 import '../../locationSearchScreen/locationSearchScreen.dart';
 import '../../mapScreen/mapScreen.dart';
+import '../../mapScreen/mapScreen2.dart';
 
 class Body extends StatefulWidget {
   const Body({super.key});
@@ -15,29 +17,19 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
-  final List<Map> myGrid =
-      List.generate(6, (index) => {"id": index, "name": "Grid $index"})
-          .toList();
+  CarouselController carouselController = CarouselController();
 
-  PageController pageController = PageController(viewportFraction: 0.88);
+  var currentPageValue = 0;
 
-  var currentPageValue = 0.0;
-
-  @override
-  void initState() {
-    super.initState();
-    pageController.addListener(() {
-      setState(() {
-        currentPageValue = pageController.page!;
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    pageController.dispose();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   carouselController.addListener(() {
+  //     setState(() {
+  //       currentPageValue = pageController.page!;
+  //     });
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,18 +41,37 @@ class _BodyState extends State<Body> {
             // SizedBox(height: SizeConfig.screenHeight! * 0.0005),
             Container(
               decoration: const BoxDecoration(color: Colors.red),
-              height: 220,
+              height: 230,
               child: Stack(
                 children: <Widget>[
-                  PageView.builder(
-                    controller: pageController,
-                    scrollDirection: Axis.horizontal,
-                    pageSnapping: true,
-                    // loop: true,
-                    itemCount: 5,
-                    itemBuilder: (context, position) {
-                      return homeCarousel();
-                    },
+                  CarouselSlider(
+                    items: [
+                      homeCarousel(),
+                      homeCarousel(),
+                      homeCarousel(),
+                      homeCarousel(),
+                      homeCarousel()
+                    ],
+                    options: CarouselOptions(
+                      initialPage: 1,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 6),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                      enableInfiniteScroll: true,
+                      viewportFraction: 0.84,
+                      aspectRatio: 2.0,
+                      height: 230.0,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          currentPageValue = index;
+                        });
+                      },
+                    ),
+                    carouselController: carouselController,
                   ),
                   Positioned(
                     bottom: 0,
@@ -70,9 +81,9 @@ class _BodyState extends State<Body> {
                         padding: const EdgeInsets.all(8.0),
                         child: DotsIndicator(
                           dotsCount: 5,
-                          position: currentPageValue,
+                          position: currentPageValue.toDouble(),
                           decorator: DotsDecorator(
-                            color: Color.fromARGB(255, 58, 57, 57),
+                            color: Color.fromARGB(255, 190, 190, 190),
                             activeColor: appPrimaryColor,
                             size: const Size.square(9.0),
                             activeSize: const Size(18.0, 9.0),
@@ -172,7 +183,7 @@ class _BodyState extends State<Body> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const MapScreen()));
+                                    builder: (context) => const MapScreen2()));
                           },
                           child: Container(
                             height: 130,
@@ -243,7 +254,7 @@ class _BodyState extends State<Body> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        PaymentsListScreen()));
+                                        const PaymentsListScreen()));
                           },
                           child: Container(
                             height: 130,
@@ -258,11 +269,11 @@ class _BodyState extends State<Body> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             child: const Padding(
-                              padding: EdgeInsets.only(top: 20),
+                              padding: EdgeInsets.only(top: 55),
                               child: Text(
-                                "Sample \n Text",
+                                "View \n Payments",
                                 style: TextStyle(
-                                    color: Color.fromARGB(211, 22, 20, 20),
+                                    color: Color.fromARGB(210, 20, 20, 20),
                                     fontSize: 26,
                                     fontWeight: FontWeight.w900),
                               ),
@@ -303,7 +314,6 @@ class _BodyState extends State<Body> {
                         ),
                       ],
                     ),
-
 //-----------------------------------------------------------------------------
                   ],
                 ),
@@ -320,12 +330,15 @@ Widget homeCarousel() {
   return Stack(
     children: [
       Container(
-        height: 220,
-        margin: const EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
+        height: 230,
+        margin: const EdgeInsets.only(top: 5, bottom: 5),
         alignment: Alignment.center,
         decoration: BoxDecoration(
+          image: const DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage("assets/images/transparency.png")),
           color: Colors.grey,
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(20),
         ),
       ),
     ],
