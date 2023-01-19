@@ -10,12 +10,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color.fromARGB(218, 255, 255, 255),
+      backgroundColor: Color.fromARGB(235, 203, 212, 245),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(235, 188, 197, 229),
         elevation: 0,
         systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Color.fromARGB(197, 219, 219, 219),
+          statusBarColor: Color.fromARGB(235, 180, 187, 212),
           statusBarIconBrightness: Brightness.dark,
         ),
         iconTheme: const IconThemeData(color: Colors.black),
@@ -26,7 +26,10 @@ class HomeScreen extends StatelessWidget {
         ),
         title: Column(
           children: const [
-            Text('Hello "User"'),
+            Text(
+              'Hello "User"',
+              style: TextStyle(color: Color.fromARGB(255, 83, 82, 82)),
+            ),
             SizedBox(height: 7),
             Text(
               "logged in as passenger/operator",

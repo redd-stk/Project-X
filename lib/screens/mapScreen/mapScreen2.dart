@@ -74,18 +74,16 @@ class _MapScreen2State extends State<MapScreen2> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: currentLocation == null
-          ? Center(
-              child: Container(
-                alignment: Alignment.center,
-                child: Column(
-                  children: const [
-                    CircularProgressIndicator(
-                      color: appPrimaryColor,
-                    ),
-                    SizedBox(height: 10),
-                    Text("Loading")
-                  ],
-                ),
+          ? Container(
+              alignment: Alignment.center,
+              child: Column(
+                children: const [
+                  CircularProgressIndicator(
+                    color: appPrimaryColor,
+                  ),
+                  SizedBox(height: 10),
+                  Text("Loading")
+                ],
               ),
             )
           : GoogleMap(
