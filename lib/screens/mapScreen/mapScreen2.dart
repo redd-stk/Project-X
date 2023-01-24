@@ -18,7 +18,9 @@ class _MapScreen2State extends State<MapScreen2> {
   final Completer<GoogleMapController> _controller = Completer();
 
   static LatLng mySourceLocation = const LatLng(-0.303099, 36.080025);
-  static LatLng destinationLocation = const LatLng(-0.300199, 36.090025);
+  // static LatLng destinationLocation = const LatLng(-0.300199, 36.090025);
+  static LatLng destinationLocation =
+      const LatLng(37.4244172378918, -122.09560174366625);
 
   List<LatLng> polylineCoordinates = [];
 
@@ -41,24 +43,30 @@ class _MapScreen2State extends State<MapScreen2> {
               zoom: 14.5,
               target: LatLng(newLoc.latitude!, newLoc.longitude!))));
 
-      setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
   }
 
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      googleApiKey,
-      PointLatLng(mySourceLocation.latitude, mySourceLocation.longitude),
-      PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
-    );
-
-    if (result.points.isNotEmpty) {
-      result.points.forEach(
-        (PointLatLng point) =>
-            polylineCoordinates.add(LatLng(point.latitude, point.longitude)),
+    PolylineResult result;
+    if (currentLocation != null) {
+      result = await polylinePoints.getRouteBetweenCoordinates(
+        googleApiKey,
+        PointLatLng(currentLocation!.latitude!, currentLocation!.longitude!),
+        PointLatLng(
+            destinationLocation.latitude, destinationLocation.longitude),
       );
-      setState(() {});
+
+      if (result.points.isNotEmpty) {
+        result.points.forEach(
+          (PointLatLng point) =>
+              polylineCoordinates.add(LatLng(point.latitude, point.longitude)),
+        );
+        setState(() {});
+      }
     }
   }
 
@@ -67,23 +75,24 @@ class _MapScreen2State extends State<MapScreen2> {
     getCurrentLocation();
     getPolyPoints();
     super.initState();
-    // _checkLocationPermissionAndGetCurrentLocation();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: currentLocation == null
-          ? Container(
-              alignment: Alignment.center,
-              child: Column(
-                children: const [
-                  CircularProgressIndicator(
-                    color: appPrimaryColor,
-                  ),
-                  SizedBox(height: 10),
-                  Text("Loading")
-                ],
+          ? Center(
+              child: Container(
+                alignment: Alignment.center,
+                child: Column(
+                  children: const [
+                    CircularProgressIndicator(
+                      color: appPrimaryColor,
+                    ),
+                    SizedBox(height: 10),
+                    Text("Loading")
+                  ],
+                ),
               ),
             )
           : GoogleMap(

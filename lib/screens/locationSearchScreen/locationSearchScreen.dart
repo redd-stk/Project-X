@@ -1,39 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:project_x/extra%20components/defaultButton.dart';
+import 'package:project_x/extra%20components/networkUtils/networkUtilis.dart';
 import 'package:project_x/screens/mapScreen/mapScreen.dart';
+import 'package:project_x/screens/mapScreen/mapScreen3.dart';
 
 import '../../constants.dart';
 import '../PaymentScreen/paymentScreen.dart';
 import 'components/location_list_tile.dart';
 
 class SearchLocationScreen extends StatefulWidget {
-  const SearchLocationScreen({Key? key}) : super(key: key);
+  const SearchLocationScreen({Key? key, this.pressed}) : super(key: key);
+  final VoidCallback? pressed;
 
   @override
   State<SearchLocationScreen> createState() => _SearchLocationScreenState();
 }
-
-// void _checkLocationPermissionAndGetCurrentLocation() async {
-//   var status = await Permission.location.status;
-//   if (!status.isGranted) {
-//     // GMaps.getCurrentLocation();
-//     var requestStatus = await Permission.location.request();
-//     if (!requestStatus.isGranted) {
-//       // GMaps.getCurrentLocation();
-//       SnackBar(content: Text("Please enable location permission for the app"));
-//     }
-//   }
-// }
 
 class _SearchLocationScreenState extends State<SearchLocationScreen> {
   bool mPesa = true;
   bool cash = false;
   late String _mpesaNumber;
 
-  // static const LatLng mySourceLocation = LatLng(-0.142565, 35.946346);
+  void placesAutocomplete(String query) async {
+    Uri uri = Uri.https(
+        "maps.googleapis.com",
+        'maps/api/place/autocomplete/json',
+        {"input": query, "key": googleApiKey});
+
+    String? response = await NetworkUtils.fetchUrl(uri);
+
+    if (response != null) {
+      print(response);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,14 +86,16 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                 width: 375,
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 211, 210, 210)),
-                child: GMaps.gMap(),
+                // child: const MapScreen3(),
               ),
             ),
             Form(
               child: Padding(
                 padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
                 child: TextFormField(
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    placesAutocomplete(value);
+                  },
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
                       hintText: "Search your destination location",
@@ -258,7 +263,9 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          placesAutocomplete("Dubai");
+        },
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           backgroundColor: secondaryColor10LightTheme,

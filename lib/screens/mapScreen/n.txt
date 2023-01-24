@@ -1,17 +1,1 @@
-static GoogleMap gMap() {
-    GMaps.getCurrentLocation();
-    return GoogleMap(
-      initialCameraPosition: CameraPosition(target: mySourceLocation, zoom: 15),
-      markers: {
-        Marker(
-          draggable: true,
-          markerId: const MarkerId("Current Location"),
-          position: mySourceLocation,
-          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),
-        )
-      },
-      onMapCreated: (GoogleMapController controller) {
-        mapController = controller; 
-      },
-    );
-  }
+Write a complete flutter code that displays a google map and automatically detects the device's location and marks it with a bitmap hue red location pin marker. A destination location which is to later be provided by the user from another screen should also be shown with a bitmap hue blue location pin marker when typed on a textformfield.And while the device's current location is still being accessed or null, display a centered circular progress indicator with 'loading' text below it. Once the user provides the destination add a polyline that routes between the device's location and the destination location entered.

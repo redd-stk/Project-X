@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:project_x/screens/AcccountDetailsScreen/accountDetails.dart';
 import 'package:project_x/screens/PaymentListScreen/PaymentListScreen.dart';
 import 'package:project_x/screens/PaymentScreen/paymentScreen.dart';
+
 import '../../../constants.dart';
 import '../../locationSearchScreen/locationSearchScreen.dart';
-import '../../mapScreen/mapScreen.dart';
 import '../../mapScreen/mapScreen2.dart';
 
 class Body extends StatefulWidget {
@@ -17,7 +17,7 @@ class Body extends StatefulWidget {
 }
 
 List<Map<String, String>> carouselItems = [
-  {'imagePath': "assets/images/transactions.png", 'text': "texts"},
+  {'imagePath': "assets/images/transactions.png", 'text': "Sample texts"},
   {
     'imagePath': "assets/images/flawlessPayment.png",
     'text': "Easy and fast modes of payment"
@@ -30,7 +30,7 @@ List<Map<String, String>> carouselItems = [
     'imagePath': "assets/images/gpsDirection.jpeg",
     'text': "Live location gps tracking to your destination"
   },
-  {'imagePath': "assets/images/invoice.jpg", 'text': "text"},
+  {'imagePath': "assets/images/invoice.jpg", 'text': "Sample text"},
 ];
 
 class _BodyState extends State<Body> {
@@ -46,7 +46,7 @@ class _BodyState extends State<Body> {
         child: Column(
           children: [
             // SizedBox(height: SizeConfig.screenHeight! * 0.0005),
-            Container(
+            SizedBox(
               height: 230,
               child: Stack(
                 children: <Widget>[
@@ -110,7 +110,7 @@ class _BodyState extends State<Body> {
                           dotsCount: 5,
                           position: currentPageValue.toDouble(),
                           decorator: DotsDecorator(
-                            color: Color.fromARGB(255, 117, 117, 117),
+                            color: const Color.fromARGB(255, 117, 117, 117),
                             activeColor: appPrimaryColor,
                             size: const Size.square(9.0),
                             activeSize: const Size(18.0, 9.0),
@@ -123,11 +123,14 @@ class _BodyState extends State<Body> {
               ),
             ),
             Container(
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(30)),
-              height: 478,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30))),
+              height: 585,
               child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8, bottom: 5),
+                padding: const EdgeInsets.only(left: 5, right: 5, bottom: 5),
                 child: Column(
                   children: [
                     Row(
@@ -141,29 +144,56 @@ class _BodyState extends State<Body> {
                                     builder: (context) =>
                                         const SearchLocationScreen()));
                           },
-                          child: Container(
-                            height: 130,
-                            width: 170,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  opacity: 0.76,
-                                  image:
-                                      AssetImage("assets/images/busMap.jpg")),
-                              color: appPrimaryColor,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 60, top: 20),
-                              child: Text(
-                                "New Trip",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 255, 255),
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w900),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 130,
+                                width: 175,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      opacity: 0.8,
+                                      image: AssetImage(
+                                          "assets/images/busMap.jpg")),
+                                  color: appPrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15)),
+                                ),
                               ),
-                            ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    color: Color.fromARGB(255, 101, 170, 235)),
+                                height: 40,
+                                width: 175,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 20),
+                                      child: Text("New trip",
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w900,
+                                              color: Color.fromARGB(
+                                                  200, 49, 49, 49))),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 5),
+                                      child: Icon(
+                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        Icons.arrow_forward,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         TextButton(
@@ -174,31 +204,56 @@ class _BodyState extends State<Body> {
                                     builder: (context) =>
                                         const QRScanScreen1()));
                           },
-                          child: Container(
-                            height: 130,
-                            width: 170,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  opacity: 0.7,
-                                  image:
-                                      AssetImage("assets/images/payment.jpg")),
-                              color: appPrimaryColor,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Padding(
-                              padding:
-                                  EdgeInsets.only(left: 40, top: 15, right: 10),
-                              child: Text(
-                                "Make A Payment",
-                                textDirection: TextDirection.rtl,
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 224, 34, 91),
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w900),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 130,
+                                width: 175,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      opacity: 0.8,
+                                      image: AssetImage(
+                                          "assets/images/payment.jpg")),
+                                  color: appPrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15)),
+                                ),
                               ),
-                            ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    color: Color.fromARGB(255, 101, 170, 235)),
+                                height: 40,
+                                width: 175,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 20),
+                                      child: Text("Payment",
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w900,
+                                              color: Color.fromARGB(
+                                                  200, 49, 49, 49))),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 5),
+                                      child: Icon(
+                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        Icons.arrow_forward,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -208,33 +263,61 @@ class _BodyState extends State<Body> {
                       children: [
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MapScreen2()));
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => MapScreen2()));
                           },
-                          child: Container(
-                            height: 130,
-                            width: 170,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      "assets/images/newGoogleMap.jpg")),
-                              color: appPrimaryColor,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(top: 20),
-                              child: Text(
-                                "View \n Map",
-                                style: TextStyle(
-                                    color: Color.fromARGB(213, 238, 8, 8),
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.w900),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 130,
+                                width: 175,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      opacity: 1.0,
+                                      image: AssetImage(
+                                          "assets/images/newGoogleMap.jpg")),
+                                  color: appPrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15)),
+                                ),
                               ),
-                            ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    color: Color.fromARGB(255, 101, 170, 235)),
+                                height: 40,
+                                width: 175,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 20),
+                                      child: Text("View Map",
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w900,
+                                              color: Color.fromARGB(
+                                                  200, 49, 49, 49))),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 5),
+                                      child: Icon(
+                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        Icons.arrow_forward,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         TextButton(
@@ -245,28 +328,56 @@ class _BodyState extends State<Body> {
                                     builder: (context) =>
                                         const AccountScreen()));
                           },
-                          child: Container(
-                            height: 130,
-                            width: 170,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  opacity: 0.8,
-                                  image: AssetImage("assets/images/12.png")),
-                              color: appPrimaryColor,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 10, top: 95),
-                              child: Text(
-                                "My Account",
-                                style: TextStyle(
-                                    color: Color.fromARGB(214, 20, 20, 20),
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w900),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 130,
+                                width: 175,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      opacity: 1.0,
+                                      image:
+                                          AssetImage("assets/images/12.png")),
+                                  color: appPrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15)),
+                                ),
                               ),
-                            ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    color: Color.fromARGB(255, 101, 170, 235)),
+                                height: 40,
+                                width: 175,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 5),
+                                      child: Text("My Account",
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w900,
+                                              color: Color.fromARGB(
+                                                  200, 49, 49, 49))),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 2),
+                                      child: Icon(
+                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        Icons.arrow_forward,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -282,28 +393,56 @@ class _BodyState extends State<Body> {
                                     builder: (context) =>
                                         const PaymentsListScreen()));
                           },
-                          child: Container(
-                            height: 130,
-                            width: 170,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: AssetImage(
-                                      "assets/images/transactions2.png")),
-                              color: appPrimaryColor,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(top: 55),
-                              child: Text(
-                                "View \n Payments",
-                                style: TextStyle(
-                                    color: Color.fromARGB(210, 20, 20, 20),
-                                    fontSize: 26,
-                                    fontWeight: FontWeight.w900),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 130,
+                                width: 175,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      opacity: 1.0,
+                                      image: AssetImage(
+                                          "assets/images/transactions2.png")),
+                                  color: appPrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15)),
+                                ),
                               ),
-                            ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    color: Color.fromARGB(255, 101, 170, 235)),
+                                height: 60,
+                                width: 175,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 5),
+                                      child: Text("View \n Payments",
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w900,
+                                              color: Color.fromARGB(
+                                                  221, 49, 49, 49))),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 2),
+                                      child: Icon(
+                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        Icons.arrow_forward,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         TextButton(
@@ -314,28 +453,56 @@ class _BodyState extends State<Body> {
                                     builder: (context) =>
                                         const AccountScreen()));
                           },
-                          child: Container(
-                            height: 130,
-                            width: 170,
-                            margin: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  fit: BoxFit.cover,
-                                  opacity: 0.8,
-                                  image: AssetImage("assets/images/12.png")),
-                              color: appPrimaryColor,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            child: const Padding(
-                              padding: EdgeInsets.only(left: 10, top: 95),
-                              child: Text(
-                                "Sample Text",
-                                style: TextStyle(
-                                    color: Color.fromARGB(214, 20, 20, 20),
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w900),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 130,
+                                width: 175,
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      opacity: 1.0,
+                                      image:
+                                          AssetImage("assets/images/12.png")),
+                                  color: appPrimaryColor,
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15)),
+                                ),
                               ),
-                            ),
+                              Container(
+                                decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                        bottomLeft: Radius.circular(10),
+                                        bottomRight: Radius.circular(10)),
+                                    color: Color.fromARGB(255, 101, 170, 235)),
+                                height: 40,
+                                width: 175,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 5),
+                                      child: Text("My Account",
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.w900,
+                                              color: Color.fromARGB(
+                                                  200, 49, 49, 49))),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 2),
+                                      child: Icon(
+                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        Icons.arrow_forward,
+                                        size: 30,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],

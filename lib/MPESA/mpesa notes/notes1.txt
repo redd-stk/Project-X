@@ -1,0 +1,137 @@
+Generate the full flutter app code that will have a scan qr code button in the first screen which when clicked navigates to the second screen where a generated qr code that have mpesa parameters as their data is scanned, the scanned data is then sent back to the parent screen where a textformfield that amount to pay is to be entered is and a make payment button that when pressed initiates an mpesa payment through mpesa api which uses the stk push method to prompt the user for confirmation of payment
+
+Here is an example of a Flutter app that uses the MPESA QR code generator and the STK Push method to make payments:
+
+Copy code
+import 'package:flutter/material.dart';
+import 'package:mpesa/mpesa.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'MPESA Payment App',
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  Mpesa mpesa = Mpesa(
+    consumerKey: "YOUR_CONSUMER_KEY",
+    consumerSecret: "YOUR_CONSUMER_SECRET",
+    environment: "sandbox"
+  );
+
+  String _amount;
+  String _transactionReference;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('MPESA Payment App'),
+      ),
+      body: Column(
+        children: <Widget>[
+          RaisedButton(
+            child: Text('Scan QR Code'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => QRScanPage()),
+              );
+            },
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Amount to Pay'),
+            onChanged: (value) {
+              setState(() {
+                _amount = value;
+              });
+            },
+          ),
+          RaisedButton(
+            child: Text('Make Payment'),
+            onPressed: () {
+              mpesa.STKPush(
+                businessShortCode: "YOUR_BUSINESS_SHORT_CODE",
+                amount: _amount,
+                transactionDesc: "Test Payment",
+                phoneNumber: "YOUR_PHONE_NUMBER",
+                callbackUrl: "YOUR_CALLBACK_URL",
+                accountRef: _transactionReference,
+                transactionDesc: "Test Payment"
+              ).then((response) {
+                if (response.statusCode == 200) {
+                  print("Payment successful");
+                } else {
+                  print("Payment failed: ${response.body}");
+                }
+              });
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class QRScanPage extends StatefulWidget {
+  @override
+  _QRScanPageState createState() => _QRScanPageState();
+}
+
+class _QRScanPageState extends State<QRScanPage> {
+  String _transactionReference;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Scan QR Code'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children
+
+
+
+mythicalig12@gmail.com
+Finish generating the code in the previous response from where you left off
+Copy code
+          children: <Widget>[
+            QrImage(
+              data: "mpesa:YOUR_BUSINESS_SHORT_CODE?amount=$_amount&reference=$_transactionReference",
+              version: QrVersions.auto,
+              size: 300.0,
+            ),
+            RaisedButton(
+              child: Text('Scan QR Code'),
+              onPressed: () async {
+                // code to scan the QR code goes here
+                // After scanning, set the _transactionReference value to the reference value obtained from the QR code
+              },
+            ),
+            RaisedButton(
+              child: Text('Submit'),
+              onPressed: () {
+                Navigator.pop(context, _transactionReference);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+Please note that this is just an example and you will need to replace "YOUR_CONSUMER_KEY", "YOUR_CONSUMER_SECRET", "YOUR_BUSINESS_SHORT_CODE", "YOUR_PHONE_NUMBER", "YOUR_CALLBACK_URL" with the appropriate values for your app and also you need to implement the code for scanning the QR code using a package like "qr_code_scanner". Also, you need to handle the errors that may occur during the STKPush request.
