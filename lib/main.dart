@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
+import 'package:project_x/constants.dart';
 import 'package:project_x/screens/signInScreen/signInScreen.dart';
 import 'package:project_x/theme.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  MpesaFlutterPlugin.setConsumerKey(consumerKey);
+  MpesaFlutterPlugin.setConsumerSecret(consumerSecret);
+
   runApp(const MyApp());
 }
 

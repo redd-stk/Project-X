@@ -86,3 +86,124 @@ final List<Transaction> transactions = [
         time: "9:00 PM",
         date: "01/01/2022"),
   ]; 
+
+
+  -----------------------------------------------------------
+
+  import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+import '../../../constants.dart';
+import '../../../extra components/defaultButton.dart';
+import '../../otpVerificationScreen/otpverification.dart';
+
+class SignUpForm extends StatefulWidget {
+const SignUpForm({super.key});
+
+@override
+State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+final TextEditingController _emailField = TextEditingController();
+final TextEditingController _nameField = TextEditingController();
+final TextEditingController _phoneNumberField = TextEditingController();
+final TextEditingController _passwordField = TextEditingController();
+final TextEditingController _confirmPasswordField = TextEditingController();
+
+final formKey = GlobalKey<FormState>();
+late String name, phoneNumber, email;
+late String password;
+late String confirmPassword;
+bool _isOperator = false;
+bool _isPassenger = false;
+
+@override
+Widget build(BuildContext context) {
+return Form(
+autovalidateMode: AutovalidateMode.always,
+key: formKey,
+child: Column(
+children: [
+const SizedBox(height: 30),
+Padding(
+padding: const EdgeInsets.symmetric(horizontal: 10),
+child: SizedBox(height: 48, child: emailFormField()),
+),
+const SizedBox(height: 20),
+Padding(
+padding: const EdgeInsets.symmetric(horizontal: 10),
+child: SizedBox(height: 48, child: nameFormField()),
+),
+const SizedBox(height: 20),
+Padding(
+padding: const EdgeInsets.symmetric(horizontal: 10),
+child: SizedBox(height: 48, child: phoneNumberFormField()),
+),
+const SizedBox(height: 20),
+Padding(
+padding: const EdgeInsets.symmetric(horizontal: 10),
+child: SizedBox(height: 48, child: passwordFormField()),
+),
+const SizedBox(height: 20),
+Padding(
+padding: const EdgeInsets.symmetric(horizontal: 10),
+child: SizedBox(height: 48, child: confirmPasswordFormField()),
+),
+const SizedBox(height: 20),
+const Text(
+"Sign up as:",
+style: TextStyle(fontSize: 14),
+textAlign: TextAlign.center,
+),
+Row(
+children: <Widget>[
+Checkbox(
+value: _isOperator,
+onChanged: (value) {
+setState(() {
+_isOperator = value;
+_isPassenger = !value;
+});
+},
+),
+const Text("Operator"),
+Checkbox(
+value: _isPassenger,
+onChanged: (value) {
+setState(
+() {
+_isPassenger = value;
+_isOperator = !value;
+});
+},
+),
+const Text("Passenger"),
+],
+),
+const SizedBox(height: 20),
+const Text(
+"By pressing the Sign Up button you agree to our terms and conditions",
+style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+textAlign: TextAlign.center,
+),
+const SizedBox(height: 15),
+Padding(
+padding: const EdgeInsets.symmetric(horizontal: 78),
+child: DefaultButton(
+text: "Sign Up",
+pressed: () {
+if (formKey.currentState.validate()) {
+return;
+}
+Navigator.push(
+context,
+MaterialPageRoute(
+builder: (context) => const OtpVerification()));
+}),
+),
+],
+),
+);
+}
+}

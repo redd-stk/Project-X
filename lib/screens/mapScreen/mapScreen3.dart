@@ -16,7 +16,7 @@ class MapScreen3 extends StatefulWidget {
 
 class _MapScreen3State extends State<MapScreen3> {
   final Completer<GoogleMapController> mapController = Completer();
-  static LatLng mySourceLocation = const LatLng(-0.303099, 36.080025);
+  // static LatLng mySourceLocation = const LatLng(-0.303099, 36.080025);
   static LatLng destinationLocation =
       const LatLng(37.4244172378918, -122.09560174366625);
 
@@ -29,6 +29,7 @@ class _MapScreen3State extends State<MapScreen3> {
 
     location.getLocation().then((location) {
       currentLocation = location;
+      getPolyPoints();
     });
 
     GoogleMapController googleMapController = await mapController.future;
@@ -36,10 +37,9 @@ class _MapScreen3State extends State<MapScreen3> {
     location.onLocationChanged.listen((newLoc) {
       currentLocation = newLoc;
 
-      googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-              zoom: 14.5,
-              target: LatLng(newLoc.latitude!, newLoc.longitude!))));
+      // googleMapController.animateCamera(CameraUpdate.newCameraPosition(
+      //     CameraPosition(
+      //         zoom: 15, target: LatLng(newLoc.latitude!, newLoc.longitude!))));
 
       if (mounted) {
         setState(() {});
@@ -56,6 +56,7 @@ class _MapScreen3State extends State<MapScreen3> {
         PointLatLng(currentLocation!.latitude!, currentLocation!.longitude!),
         PointLatLng(
             destinationLocation.latitude, destinationLocation.longitude),
+        travelMode: TravelMode.driving,
       );
 
       if (result.points.isNotEmpty) {
@@ -71,33 +72,45 @@ class _MapScreen3State extends State<MapScreen3> {
   @override
   void initState() {
     getCurrentLocation();
-    getPolyPoints();
+    // getPolyPoints();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 214, 214, 214),
       body: currentLocation == null
           ? Center(
-              child: Container(
-                alignment: Alignment.center,
-                child: Column(
-                  children: const [
-                    CircularProgressIndicator(
-                      color: appPrimaryColor,
-                    ),
-                    SizedBox(height: 10),
-                    Text("Loading")
-                  ],
-                ),
+              child: Column(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(
+                    color: appPrimaryColor,
+                  ),
+                  SizedBox(height: 10),
+                  Text("Loading")
+                ],
               ),
             )
           : GoogleMap(
               initialCameraPosition: CameraPosition(
                   target: LatLng(
                       currentLocation!.latitude!, currentLocation!.longitude!),
-                  zoom: 15.5),
+                  zoom: 14.5),
+              // trafficEnabled: true,
+              // buildingsEnabled: true,
+              myLocationButtonEnabled: true,
+              myLocationEnabled: true,
+              polylines: {
+                Polyline(
+                  polylineId: const PolylineId("route"),
+                  points: polylineCoordinates,
+                  color: appPrimaryColor,
+                  width: 5,
+                )
+              },
               markers: {
                 Marker(
                   draggable: true,
@@ -109,7 +122,7 @@ class _MapScreen3State extends State<MapScreen3> {
                 ),
                 Marker(
                   draggable: true,
-                  markerId: const MarkerId("Current Location"),
+                  markerId: const MarkerId("Destination Location"),
                   position: destinationLocation,
                   icon: BitmapDescriptor.defaultMarkerWithHue(
                       BitmapDescriptor.hueBlue),

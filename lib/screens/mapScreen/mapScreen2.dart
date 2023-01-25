@@ -18,9 +18,9 @@ class _MapScreen2State extends State<MapScreen2> {
   final Completer<GoogleMapController> _controller = Completer();
 
   static LatLng mySourceLocation = const LatLng(-0.303099, 36.080025);
-  // static LatLng destinationLocation = const LatLng(-0.300199, 36.090025);
-  static LatLng destinationLocation =
-      const LatLng(37.4244172378918, -122.09560174366625);
+  static LatLng destinationLocation = const LatLng(-0.300199, 36.090025);
+  // static LatLng destinationLocation =
+  //     const LatLng(37.4244172378918, -122.09560174366625);
 
   List<LatLng> polylineCoordinates = [];
 
@@ -35,44 +35,44 @@ class _MapScreen2State extends State<MapScreen2> {
 
     GoogleMapController googleMapController = await _controller.future;
 
-    location.onLocationChanged.listen((newLoc) {
-      currentLocation = newLoc;
+    // location.onLocationChanged.listen((newLoc) {
+    //   currentLocation = newLoc;
 
-      googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-          CameraPosition(
-              zoom: 14.5,
-              target: LatLng(newLoc.latitude!, newLoc.longitude!))));
+    //   googleMapController.animateCamera(CameraUpdate.newCameraPosition(
+    //       CameraPosition(
+    //           zoom: 14.5,
+    //           target: LatLng(newLoc.latitude!, newLoc.longitude!))));
 
-      if (mounted) {
-        setState(() {});
-      }
-    });
+    //   if (mounted) {
+    //     setState(() {});
+    //   }
+    // });
   }
 
   void getPolyPoints() async {
     PolylinePoints polylinePoints = PolylinePoints();
     PolylineResult result;
-    if (currentLocation != null) {
-      result = await polylinePoints.getRouteBetweenCoordinates(
-        googleApiKey,
-        PointLatLng(currentLocation!.latitude!, currentLocation!.longitude!),
-        PointLatLng(
-            destinationLocation.latitude, destinationLocation.longitude),
-      );
+    // if (currentLocation != null) {
+    result = await polylinePoints.getRouteBetweenCoordinates(
+      googleApiKey,
+      // PointLatLng(currentLocation!.latitude!, currentLocation!.longitude!),
+      PointLatLng(mySourceLocation.latitude, mySourceLocation.longitude),
+      PointLatLng(destinationLocation.latitude, destinationLocation.longitude),
+    );
 
-      if (result.points.isNotEmpty) {
-        result.points.forEach(
-          (PointLatLng point) =>
-              polylineCoordinates.add(LatLng(point.latitude, point.longitude)),
-        );
-        setState(() {});
-      }
+    if (result.points.isNotEmpty) {
+      result.points.forEach(
+        (PointLatLng point) =>
+            polylineCoordinates.add(LatLng(point.latitude, point.longitude)),
+      );
+      setState(() {});
     }
+    // }
   }
 
   @override
   void initState() {
-    getCurrentLocation();
+    // getCurrentLocation();
     getPolyPoints();
     super.initState();
   }
@@ -82,23 +82,23 @@ class _MapScreen2State extends State<MapScreen2> {
     return Scaffold(
       body: currentLocation == null
           ? Center(
-              child: Container(
-                alignment: Alignment.center,
-                child: Column(
-                  children: const [
-                    CircularProgressIndicator(
-                      color: appPrimaryColor,
-                    ),
-                    SizedBox(height: 10),
-                    Text("Loading")
-                  ],
-                ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  CircularProgressIndicator(
+                    color: appPrimaryColor,
+                  ),
+                  SizedBox(height: 10),
+                  Text("Loading")
+                ],
               ),
             )
           : GoogleMap(
               initialCameraPosition: CameraPosition(
                   target: LatLng(
-                      currentLocation!.latitude!, currentLocation!.longitude!),
+                      mySourceLocation.latitude, mySourceLocation.longitude),
+                  // LatLng(
+                  //     currentLocation!.latitude!, currentLocation!.longitude!),
                   zoom: 14.5),
               polylines: {
                 Polyline(
@@ -108,18 +108,25 @@ class _MapScreen2State extends State<MapScreen2> {
                   width: 5,
                 )
               },
+              trafficEnabled: true,
+              buildingsEnabled: true,
+              myLocationButtonEnabled: true,
+              myLocationEnabled: true,
               markers: {
                 Marker(
                   draggable: true,
                   markerId: const MarkerId("Current Location"),
-                  position: LatLng(
-                      currentLocation!.latitude!, currentLocation!.longitude!),
+                  position:
+                      // LatLng(
+                      //     currentLocation!.latitude!, currentLocation!.longitude!),
+                      LatLng(mySourceLocation.latitude,
+                          mySourceLocation.longitude),
                   icon: BitmapDescriptor.defaultMarkerWithHue(
                       BitmapDescriptor.hueRed),
                 ),
                 Marker(
                   draggable: true,
-                  markerId: const MarkerId("Current Location"),
+                  markerId: const MarkerId("Destination Location"),
                   position: destinationLocation,
                   icon: BitmapDescriptor.defaultMarkerWithHue(
                       BitmapDescriptor.hueBlue),

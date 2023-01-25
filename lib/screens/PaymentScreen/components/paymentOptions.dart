@@ -40,6 +40,9 @@ class _CheckboxRowState extends State<CheckboxRow> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Checkbox(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
                   value: _sendMoney,
                   onChanged: (value) {
                     setState(() {
@@ -54,6 +57,9 @@ class _CheckboxRowState extends State<CheckboxRow> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Checkbox(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
                   value: _tillNumber,
                   onChanged: (value) {
                     setState(() {
@@ -68,6 +74,9 @@ class _CheckboxRowState extends State<CheckboxRow> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Checkbox(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
                   value: _paybill,
                   onChanged: (value) {
                     setState(() {

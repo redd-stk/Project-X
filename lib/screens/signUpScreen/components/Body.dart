@@ -28,7 +28,6 @@ class Body extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               const SignUpForm(),
-              
             ],
           ),
         ),

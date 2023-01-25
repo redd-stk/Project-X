@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:project_x/extra%20components/defaultButton.dart';
 import 'package:project_x/extra%20components/networkUtils/networkUtilis.dart';
-import 'package:project_x/screens/mapScreen/mapScreen.dart';
 import 'package:project_x/screens/mapScreen/mapScreen3.dart';
 
 import '../../constants.dart';
 import '../PaymentScreen/paymentScreen.dart';
+import '../mapScreen/mapScreen2.dart';
 import 'components/location_list_tile.dart';
 
 class SearchLocationScreen extends StatefulWidget {
@@ -86,7 +85,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                 width: 375,
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 211, 210, 210)),
-                // child: const MapScreen3(),
+                child: const MapScreen3(),
               ),
             ),
             Form(
@@ -155,6 +154,9 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(children: <Widget>[
                 Checkbox(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
                   value: mPesa,
                   onChanged: (value) {
                     setState(() {
@@ -169,6 +171,9 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                 ),
                 const SizedBox(width: 30),
                 Checkbox(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
                   value: cash,
                   onChanged: (value) {
                     setState(() {

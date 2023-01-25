@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:project_x/screens/AcccountDetailsScreen/accountDetails.dart';
 import 'package:project_x/screens/PaymentListScreen/PaymentListScreen.dart';
 import 'package:project_x/screens/PaymentScreen/paymentScreen.dart';
+import 'package:project_x/screens/mapScreen/mapScreen3.dart';
 
+import '../../../MPESA/mpesaDemo.dart';
 import '../../../constants.dart';
 import '../../locationSearchScreen/locationSearchScreen.dart';
 import '../../mapScreen/mapScreen2.dart';
@@ -263,10 +265,10 @@ class _BodyState extends State<Body> {
                       children: [
                         TextButton(
                           onPressed: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => MapScreen2()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MapScreen3()));
                           },
                           child: Column(
                             children: [
@@ -451,7 +453,7 @@ class _BodyState extends State<Body> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        const AccountScreen()));
+                                        const PaymentScreen2()));
                           },
                           child: Column(
                             children: [

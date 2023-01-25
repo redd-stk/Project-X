@@ -162,6 +162,10 @@ class _PaymentsListScreenState extends State<PaymentsListScreen> {
                           cells: [
                             DataCell(
                               Checkbox(
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                ),
                                 value: selectedRows.contains(txn),
                                 onChanged: (bool? value) {
                                   setState(() {

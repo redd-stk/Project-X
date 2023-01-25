@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../../constants.dart';
 import '../../../extra components/defaultButton.dart';
+import '../../../size_config.dart';
 import '../../otpVerificationScreen/otpverification.dart';
-
-// import '../../../size_config.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
@@ -24,6 +24,8 @@ class _SignUpFormState extends State<SignUpForm> {
   late String name, phoneNumber, email;
   late String password;
   late String confirmPassword;
+  bool _isOperator = false;
+  bool _isPassenger = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +59,49 @@ class _SignUpFormState extends State<SignUpForm> {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: SizedBox(height: 48, child: confirmPasswordFormField()),
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 5),
           const Text(
-            "**By pressing the Sign Up button you agree to our terms and conditions**",
+            "Sign up as:",
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: Row(
+              children: <Widget>[
+                Checkbox(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  value: _isOperator,
+                  onChanged: (value) {
+                    setState(() {
+                      _isOperator = value!;
+                      _isPassenger = !value;
+                    });
+                  },
+                ),
+                const Text("Operator"),
+                SizedBox(width: 50),
+                Checkbox(
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  value: _isPassenger,
+                  onChanged: (value) {
+                    setState(() {
+                      _isPassenger = value!;
+                      _isOperator = !value;
+                    });
+                  },
+                ),
+                const Text("Passenger"),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "By pressing the Sign Up button you agree to our terms and conditions",
             style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
             textAlign: TextAlign.center,
           ),
