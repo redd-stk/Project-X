@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 import '../../constants.dart';
+import '../../size_config.dart';
 
 class MapScreen3 extends StatefulWidget {
   const MapScreen3({super.key});
@@ -17,8 +20,7 @@ class MapScreen3 extends StatefulWidget {
 class _MapScreen3State extends State<MapScreen3> {
   final Completer<GoogleMapController> mapController = Completer();
   // static LatLng mySourceLocation = const LatLng(-0.303099, 36.080025);
-  static LatLng destinationLocation =
-      const LatLng(37.4244172378918, -122.09560174366625);
+  static LatLng destinationLocation = const LatLng(-0.303099, 36.080025);
 
   List<LatLng> polylineCoordinates = [];
 
@@ -85,11 +87,11 @@ class _MapScreen3State extends State<MapScreen3> {
               child: Column(
                 // crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   CircularProgressIndicator(
                     color: appPrimaryColor,
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: getScreenHeight(10)),
                   Text("Loading")
                 ],
               ),
@@ -100,7 +102,7 @@ class _MapScreen3State extends State<MapScreen3> {
                       currentLocation!.latitude!, currentLocation!.longitude!),
                   zoom: 14.5),
               // trafficEnabled: true,
-              // buildingsEnabled: true,
+              buildingsEnabled: true,
               myLocationButtonEnabled: true,
               myLocationEnabled: true,
               polylines: {

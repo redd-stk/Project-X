@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:project_x/screens/PaymentScreen/components/QRScanScreen.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
 import '../../main.dart';
+import '../../size_config.dart';
 import 'components/paymentOptions.dart';
 
 class QRScanScreen1 extends StatefulWidget {
@@ -28,28 +30,54 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
   @override
   Widget build(BuildContext context) {
     final paymentProvider = Provider.of<PaymentProvider>(context);
+    SizeConfig.init(context);
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Color.fromARGB(197, 219, 219, 219),
+          statusBarIconBrightness: Brightness.dark,
+        ),
+        iconTheme: const IconThemeData(color: Colors.black),
+        titleTextStyle: TextStyle(
+          fontSize: getScreenWidth(21),
+          fontWeight: FontWeight.bold,
+          color: appPrimaryColor,
+        ),
+        title: const Text("Make a Payment"),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: appPrimaryColor),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 5),
+            padding: EdgeInsets.only(
+                left: getScreenWidth(8),
+                right: getScreenWidth(8),
+                bottom: getScreenHeight(5),
+                top: getScreenHeight(5)),
             child: Stack(
               children: [
                 Column(
                   children: [
                     Container(
-                      height: 220,
+                      height: getScreenHeight(220),
                       width: double.infinity,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                           color: const Color.fromARGB(255, 190, 190, 190)),
                       child: SizedBox(
-                        height: 215,
+                        height: getScreenHeight(215),
                         width: double.infinity,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 50),
+                          padding: EdgeInsets.only(top: getScreenHeight(50)),
                           child: Column(
                             children: [
                               TextButton(
@@ -62,18 +90,18 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                                       ));
                                 },
                                 child: Column(
-                                  children: const [
+                                  children: [
                                     Icon(
                                       Icons.photo_camera,
-                                      size: 65,
+                                      size: getScreenWidth(65),
                                       color: appPrimaryColor,
                                     ),
-                                    SizedBox(height: 15),
+                                    SizedBox(height: getScreenHeight(15)),
                                     Text(
                                       "Scan QR Code \n to capture pament details",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          fontSize: 14,
+                                          fontSize: getScreenWidth(14),
                                           fontWeight: FontWeight.bold,
                                           color:
                                               Color.fromARGB(255, 44, 43, 43)),
@@ -86,16 +114,17 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    const Text(
+                    SizedBox(height: getScreenHeight(10)),
+                    Text(
                       "Payment Details Captured",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: getScreenWidth(14)),
                     ),
-                    const SizedBox(height: 10),
+                    SizedBox(height: getScreenHeight(10)),
                     Container(
-                      height: 55,
-                      width: 400,
+                      height: getScreenHeight(55),
+                      width: getScreenWidth(400),
                       decoration: BoxDecoration(
                           color: const Color.fromARGB(255, 190, 190, 190),
                           borderRadius: BorderRadius.circular(15)),
@@ -103,13 +132,15 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                         future: Future.delayed(Duration.zero),
                         builder: (context, snapshot) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 15),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: getScreenWidth(20),
+                                vertical: getScreenHeight(15)),
                             child: TextFormField(
                               initialValue:
                                   "!! Payment details not available for now !!",
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.red),
+                              style: TextStyle(
+                                  fontSize: getScreenWidth(14),
+                                  color: Colors.red),
                               enabled: true,
                             ),
                           );
@@ -124,47 +155,47 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                       //   enabled: false,
                       // ),
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
+                    SizedBox(height: getScreenHeight(20)),
+                    Text(
                       "Or \nEnter Details Manually",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 14.5,
+                          fontSize: getScreenWidth(14.5),
                           color: appPrimaryColor),
                     ),
-                    const SizedBox(height: 5),
+                    SizedBox(height: getScreenHeight(5)),
                     const CheckboxRow(),
-                    const SizedBox(height: 15),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 105),
-                      child: Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                            color: const Color.fromARGB(215, 245, 245, 245),
-                            borderRadius: BorderRadius.circular(10)),
-                        child: TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.arrow_back,
-                                  size: 30,
-                                ),
-                                SizedBox(width: 5),
-                                Text(
-                                  "Back Home",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
-                                ),
-                              ],
-                            )),
-                      ),
-                    )
+                    // const SizedBox(height: 15),
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 105),
+                    //   child: Container(
+                    //     height: 45,
+                    //     decoration: BoxDecoration(
+                    //         color: const Color.fromARGB(215, 245, 245, 245),
+                    //         borderRadius: BorderRadius.circular(10)),
+                    //     child: TextButton(
+                    //         onPressed: () {
+                    //           Navigator.pop(context);
+                    //         },
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.center,
+                    //           children: const [
+                    //             Icon(
+                    //               Icons.arrow_back,
+                    //               size: 30,
+                    //             ),
+                    //             SizedBox(width: 5),
+                    //             Text(
+                    //               "Back Home",
+                    //               style: TextStyle(
+                    //                   fontWeight: FontWeight.bold,
+                    //                   fontSize: 16),
+                    //             ),
+                    //           ],
+                    //         )),
+                    //   ),
+                    // )
                   ],
                 ),
               ],
@@ -175,9 +206,9 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
     );
   }
 
-  @override
-  void dispose() {
-    _paymentDetailsController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _paymentDetailsController.dispose();
+  //   super.dispose();
+  // }
 }

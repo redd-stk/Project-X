@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
               // SizedBox(height: SizeConfig.screenHeight! * 0.0005),
               CircleAvatar(
                 backgroundColor: Colors.black,

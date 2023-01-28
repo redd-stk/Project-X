@@ -1,9 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../../../constants.dart';
 import '../../../extra components/defaultButton.dart';
-import '../../../size_config.dart';
 import '../../otpVerificationScreen/otpverification.dart';
 
 class SignUpForm extends StatefulWidget {

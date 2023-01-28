@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../../../size_config.dart';
 
 class LocationListTile extends StatelessWidget {
   const LocationListTile({
@@ -24,8 +25,9 @@ class LocationListTile extends StatelessWidget {
             location,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            style:
-                const TextStyle(fontSize: 15, color: Color.fromARGB(235, 68, 68, 68)),
+            style: TextStyle(
+                fontSize: getScreenWidth(15),
+                color: Color.fromARGB(235, 68, 68, 68)),
           ),
         ),
         const Divider(

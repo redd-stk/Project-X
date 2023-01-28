@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_google_places/flutter_google_places.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:project_x/extra%20components/defaultButton.dart';
 import 'package:project_x/extra%20components/networkUtils/networkUtilis.dart';
 import 'package:project_x/screens/mapScreen/mapScreen3.dart';
 
 import '../../constants.dart';
+import '../../size_config.dart';
 import '../PaymentScreen/paymentScreen.dart';
-import '../mapScreen/mapScreen2.dart';
 import 'components/location_list_tile.dart';
 
 class SearchLocationScreen extends StatefulWidget {
@@ -48,8 +47,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
           statusBarIconBrightness: Brightness.dark,
         ),
         iconTheme: const IconThemeData(color: Colors.black),
-        titleTextStyle: const TextStyle(
-          fontSize: 22,
+        titleTextStyle: TextStyle(
+          fontSize: getScreenWidth(22),
           fontWeight: FontWeight.bold,
           color: appPrimaryColor,
         ),
@@ -70,19 +69,19 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            const Text(
+            Text(
               "Set Your Desination",
               style: TextStyle(
                 color: appPrimaryColor,
-                fontSize: 18,
+                fontSize: getScreenWidth(18),
                 fontWeight: FontWeight.bold,
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(5.0),
+              padding: EdgeInsets.all(5.0),
               child: Container(
-                height: 200,
-                width: 375,
+                height: getScreenHeight(200),
+                width: getScreenWidth(375),
                 decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 211, 210, 210)),
                 child: const MapScreen3(),
@@ -241,15 +240,17 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
             cash
                 ? Column(
                     children: [
-                      const Text(
-                          "!! Ensure you pay your cash before alighting !!",
+                      Text("!! Ensure you pay your cash before alighting !!",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: getScreenWidth(16),
                             color: Colors.red,
                           )),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 100, right: 100, top: 35, bottom: 10),
+                        padding: EdgeInsets.only(
+                            left: getScreenWidth(100),
+                            right: getScreenWidth(100),
+                            top: getScreenHeight(35),
+                            bottom: getScreenHeight(10)),
                         child: DefaultButton(
                           pressed: () {},
                           text: "Finish",

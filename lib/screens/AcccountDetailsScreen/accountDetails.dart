@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/constants.dart';
 
+import '../../size_config.dart';
+
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
 
@@ -9,58 +11,59 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.symmetric(horizontal: getScreenWidth(20)),
           child: Column(
             children: <Widget>[
               Container(
-                margin: const EdgeInsets.only(top: 100),
+                margin: EdgeInsets.only(top: getScreenHeight(100)),
                 child: Stack(
                   children: <Widget>[
-                    const CircleAvatar(
-                      radius: 70,
-                      backgroundColor: Color.fromARGB(255, 204, 203, 203),
+                    CircleAvatar(
+                      radius: getScreenWidth(70),
+                      backgroundColor: const Color.fromARGB(255, 204, 203, 203),
                     ),
                     Positioned(
                       bottom: 0,
                       right: 0,
-                      left: 90,
-                      top: 85,
+                      left: getScreenWidth(90),
+                      top: getScreenHeight(85),
                       child: TextButton(
                           onPressed: () {},
-                          child: const Icon(
+                          child: Icon(
                             Icons.camera_alt,
                             color: appPrimaryColor,
-                            size: 44,
+                            size: getScreenWidth(44),
                           )),
                     )
                   ],
                 ),
               ),
-              const SizedBox(height: 50),
+              SizedBox(height: getScreenHeight(50)),
               Column(
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             Icons.account_circle,
                             color: Colors.grey,
                           ),
-                          SizedBox(width: 15),
+                          SizedBox(width: getScreenWidth(15)),
                           Text("User Account Name",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 80, 79, 79))),
+                                  fontSize: getScreenWidth(15),
+                                  color:
+                                      const Color.fromARGB(255, 80, 79, 79))),
                         ],
                       ),
                       TextButton.icon(
-                        icon: const Icon(Icons.edit, size: 20),
-                        label: const Text(
+                        icon: Icon(Icons.edit, size: getScreenWidth(20)),
+                        label: Text(
                           "Edit",
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: getScreenWidth(14)),
                         ),
                         onPressed: () {
                           // handle edit button press
@@ -75,24 +78,25 @@ class AccountScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             Icons.mail,
                             color: Colors.grey,
                           ),
-                          SizedBox(width: 15),
+                          SizedBox(width: getScreenWidth(15)),
                           Text("User Account email",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 80, 79, 79))),
+                                  fontSize: getScreenWidth(15),
+                                  color:
+                                      const Color.fromARGB(255, 80, 79, 79))),
                         ],
                       ),
                       TextButton.icon(
-                        icon: const Icon(Icons.edit, size: 20),
-                        label: const Text(
+                        icon: Icon(Icons.edit, size: getScreenWidth(20)),
+                        label: Text(
                           "Edit",
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: getScreenWidth(14)),
                         ),
                         onPressed: () {
                           // handle edit button press
@@ -107,24 +111,25 @@ class AccountScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
-                        children: const [
-                          Icon(
+                        children: [
+                          const Icon(
                             Icons.phone,
                             color: Colors.grey,
                           ),
-                          SizedBox(width: 15),
+                          SizedBox(width: getScreenWidth(15)),
                           Text("User Phone number",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 15,
-                                  color: Color.fromARGB(255, 80, 79, 79))),
+                                  fontSize: getScreenWidth(15),
+                                  color:
+                                      const Color.fromARGB(255, 80, 79, 79))),
                         ],
                       ),
                       TextButton.icon(
-                        icon: const Icon(Icons.edit, size: 20),
-                        label: const Text(
+                        icon: Icon(Icons.edit, size: getScreenWidth(20)),
+                        label: Text(
                           "Edit",
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: getScreenWidth(14)),
                         ),
                         onPressed: () {
                           // handle edit button press
@@ -141,18 +146,19 @@ class AccountScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Row(
-                          children: const [
-                            Icon(
+                          children: [
+                            const Icon(
                               Icons.lock,
                               color: Colors.grey,
                             ),
-                            SizedBox(width: 15),
+                            SizedBox(width: getScreenWidth(15)),
                             Text("Change Account Password",
                                 // _user.displayName,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    color: Color.fromARGB(255, 80, 79, 79))),
+                                    fontSize: getScreenWidth(15),
+                                    color:
+                                        const Color.fromARGB(255, 80, 79, 79))),
                           ],
                         ),
                         const Icon(Icons.arrow_forward_ios),
@@ -162,8 +168,8 @@ class AccountScreen extends StatelessWidget {
                   const Divider(
                     thickness: 1,
                   ),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: getScreenHeight(30),
                   ),
                   TextButton(
                     onPressed: () {
@@ -171,27 +177,27 @@ class AccountScreen extends StatelessWidget {
                     },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
+                      children: [
+                        const Icon(
                           Icons.home,
                           color: Colors.grey,
                         ),
-                        SizedBox(width: 15),
+                        SizedBox(width: getScreenHeight(15)),
                         Text("Back Home",
                             // _user.displayName,
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                                color: Color.fromARGB(255, 80, 79, 79))),
-                        SizedBox(width: 10),
-                        Icon(
+                                fontSize: getScreenHeight(15),
+                                color: const Color.fromARGB(255, 80, 79, 79))),
+                        SizedBox(width: getScreenHeight(10)),
+                        const Icon(
                           Icons.arrow_forward_ios,
                           color: Colors.grey,
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 50),
+                  SizedBox(height: getScreenHeight(50)),
                   TextButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
@@ -203,10 +209,10 @@ class AccountScreen extends StatelessWidget {
                     onPressed: () {},
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(Icons.exit_to_app, color: Colors.red),
-                        SizedBox(width: 10),
-                        Text("Logout",
+                      children: [
+                        const Icon(Icons.exit_to_app, color: Colors.red),
+                        SizedBox(width: getScreenHeight(10)),
+                        const Text("Logout",
                             style: TextStyle(color: Colors.red, fontSize: 16)),
                       ],
                     ),

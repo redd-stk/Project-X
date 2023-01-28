@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../../main.dart';
+import '../../../size_config.dart';
 
 class QrCodeScanScreen2 extends StatefulWidget {
   const QrCodeScanScreen2({super.key});
@@ -28,29 +29,32 @@ class _QrCodeScanScreen2State extends State<QrCodeScanScreen2> {
             cameraFacing: CameraFacing.back,
             overlay: QrScannerOverlayShape(
               borderColor: const Color.fromARGB(255, 207, 14, 0),
-              borderRadius: 10,
+              borderRadius: getScreenWidth(10),
               borderLength: 30,
-              borderWidth: 10,
-              cutOutSize: 300,
+              borderWidth: getScreenWidth(10),
+              cutOutSize: getScreenWidth(300),
             ),
           ),
           Positioned(
-            top: 50,
-            left: 30,
+            top: getScreenHeight(50),
+            left: getScreenWidth(20),
             child: IconButton(
-              icon: const Icon(Icons.close, color: Colors.white, size: 37),
+              icon: Icon(Icons.close,
+                  color: Colors.white, size: getScreenWidth(30)),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
           ),
           Positioned(
-            top: 50,
-            right: 30,
+            top: getScreenHeight(50),
+            right: getScreenWidth(20),
             child: IconButton(
               icon: _torchEnabled
-                  ? const Icon(Icons.flash_on, color: Colors.white, size: 37)
-                  : const Icon(Icons.flash_off, color: Colors.white, size: 37),
+                  ? Icon(Icons.flash_on,
+                      color: Colors.white, size: getScreenWidth(30))
+                  : Icon(Icons.flash_off,
+                      color: Colors.white, size: getScreenWidth(30)),
               onPressed: () async {
                 try {
                   _torchEnabled = !_torchEnabled;

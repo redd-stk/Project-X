@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/screens/paymentSuccessfulScreen/paymentSuccessful.dart';
+import 'package:project_x/size_config.dart';
 
 import '../../../extra components/defaultButton.dart';
 import '../../../theme.dart';
@@ -37,7 +38,7 @@ class _CheckboxRowState extends State<CheckboxRow> {
         child: Column(
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Checkbox(
                   shape: const RoundedRectangleBorder(
@@ -52,9 +53,11 @@ class _CheckboxRowState extends State<CheckboxRow> {
                     });
                   },
                 ),
-                const Text(
+                Text(
                   "Send Money",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: getScreenWidth(14)),
                 ),
                 Checkbox(
                   shape: const RoundedRectangleBorder(
@@ -69,9 +72,11 @@ class _CheckboxRowState extends State<CheckboxRow> {
                     });
                   },
                 ),
-                const Text(
+                Text(
                   "Till number",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: getScreenWidth(14),
+                      fontWeight: FontWeight.bold),
                 ),
                 Checkbox(
                   shape: const RoundedRectangleBorder(
@@ -86,9 +91,11 @@ class _CheckboxRowState extends State<CheckboxRow> {
                     });
                   },
                 ),
-                const Text(
+                Text(
                   "Paybill",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: getScreenWidth(14)),
                 ),
               ],
             ),
@@ -117,9 +124,9 @@ class _CheckboxRowState extends State<CheckboxRow> {
                         visible:
                             _phoneNumber.isEmpty || _phoneNumber.length < 10,
                         child: _phoneNumber.isEmpty
-                            ? const Text("Phone Number cannot be empty",
+                            ? Text("Phone Number cannot be empty",
                                 style: TextStyle(
-                                    fontSize: 13.5,
+                                    fontSize: getScreenWidth(13.5),
                                     color: Color.fromARGB(255, 255, 38, 23)))
                             : const Text("Enter a valid phone number",
                                 style: TextStyle(
@@ -146,7 +153,7 @@ class _CheckboxRowState extends State<CheckboxRow> {
                           });
                         },
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: getScreenHeight(10)),
                       TextFormField(
                         decoration: inputDeco("Enter Account Number"),
                         onChanged: (value) {
@@ -167,13 +174,15 @@ class _CheckboxRowState extends State<CheckboxRow> {
                         child: Column(
                           children: [
                             if (_paybillNumber.isEmpty)
-                              const Text("Paybill Number cannot be empty",
+                              Text("Paybill Number cannot be empty",
                                   style: TextStyle(
-                                      fontSize: 13.5, color: Colors.red)),
+                                      fontSize: getScreenWidth(13.5),
+                                      color: Colors.red)),
                             if (_accountNumber.isEmpty)
-                              const Text("Account Number cannot be empty",
+                              Text("Account Number cannot be empty",
                                   style: TextStyle(
-                                      fontSize: 13.5, color: Colors.red))
+                                      fontSize: getScreenWidth(13.5),
+                                      color: Colors.red))
                           ],
                         ),
                       ),
@@ -199,15 +208,15 @@ class _CheckboxRowState extends State<CheckboxRow> {
                       ),
                       Visibility(
                         visible: _tillNumberInput.isEmpty,
-                        child: const Text("Till Number value cannot be empty",
+                        child: Text("Till Number value cannot be empty",
                             style: TextStyle(
-                                fontSize: 13.5,
+                                fontSize: getScreenWidth(13.5),
                                 color: Color.fromARGB(255, 255, 38, 23))),
                       ),
                     ],
                   )
                 : Container(),
-            const SizedBox(height: 10),
+            SizedBox(height: getScreenHeight(10)),
             TextFormField(
               decoration: inputDeco("Enter amount to pay"),
               keyboardType: TextInputType.number,
@@ -219,13 +228,14 @@ class _CheckboxRowState extends State<CheckboxRow> {
             ),
             Visibility(
               visible: amount.isEmpty,
-              child: const Text("Amount to pay cannot be empty",
+              child: Text("Amount to pay cannot be empty",
                   style: TextStyle(
-                      fontSize: 13.5, color: Color.fromARGB(255, 255, 38, 23))),
+                      fontSize: getScreenWidth(13.5),
+                      color: Color.fromARGB(255, 255, 38, 23))),
             ),
-            SizedBox(height: 15),
+            SizedBox(height: getScreenHeight(15)),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 90),
+              padding: EdgeInsets.symmetric(horizontal: getScreenWidth(90)),
               child: DefaultButton(
                   text: "Make Payment",
                   pressed: () {

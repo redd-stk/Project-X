@@ -1,5 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:mpesa_flutter_plugin/mpesa_flutter_plugin.dart';
+
+import '../constants.dart';
+import '../size_config.dart';
 
 class PaymentScreen2 extends StatefulWidget {
   const PaymentScreen2({super.key});
@@ -10,7 +15,7 @@ class PaymentScreen2 extends StatefulWidget {
 
 class _PaymentScreen2State extends State<PaymentScreen2> {
   // final _formKey = GlobalKey<FormState>();
-  // late String _phoneNumber;
+  late String _mpesaNumber;
   // late double _amount;
 
   Future<dynamic> startTransaction(
@@ -48,45 +53,59 @@ class _PaymentScreen2State extends State<PaymentScreen2> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
+    print(SizeConfig.screenHeight);
+    print(SizeConfig.screenWidth);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Make Payment'),
       ),
-      body: Form(
-        // key: _formKey,
-        child: Column(
-          children: <Widget>[
-            // TextFormField(
-            //   decoration: const InputDecoration(labelText: 'Phone Number'),
-            //   // validator: (value) {
-            //   //   if (value!.isEmpty) {
-            //   //     return 'Please enter a phone number';
-            //   //   }
-            //   //   return null;
-            //   // },
-            //   onSaved: (value) => _phoneNumber = value!,
-            // ),
-            // TextFormField(
-            //   decoration: const InputDecoration(labelText: 'Amount'),
-            //   // validator: (value) {
-            //   //   if (value!.isEmpty) {
-            //   //     return 'Please enter an amount';
-            //   //   }
-            //   //   return null;
-            //   // },
-            //   onSaved: (value) => _amount = value! as double,
-            // ),
-            TextButton(
-              onPressed: () async {
-                startTransaction(amount: 1.0, phoneNumber: '254790193402');
-                // if (_formKey.currentState!.validate()) {
-                //   _formKey.currentState!.save();
+      body: Center(
+        child: Form(
+          // key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                height: getScreenHeight(115),
+                width: getScreenWidth(300),
+                color: Colors.orange,
+              ),
+              TextFormField(
+                decoration: InputDecoration(
+                  prefixText: '254',
+                  contentPadding:
+                      const EdgeInsets.only(top: 9, bottom: 9, left: 20),
+                  labelText: "Enter Your Mpesa Number",
+                  labelStyle: const TextStyle(
+                      fontSize: 14, fontWeight: FontWeight.w600),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: appPrimaryColor)),
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(color: appPrimaryColor)),
+                ),
+                keyboardType: TextInputType.number,
+                maxLength: 12,
+                onChanged: (value) {
+                  setState(() {
+                    _mpesaNumber = '254$value';
+                  });
+                },
+              ),
+              TextButton(
+                onPressed: () async {
+                  startTransaction(amount: 1.0, phoneNumber: _mpesaNumber);
+                  // if (_formKey.currentState!.validate()) {
+                  //   _formKey.currentState!.save();
 
-                // }
-              },
-              child: const Text('Make Payment'),
-            ),
-          ],
+                  // }
+                },
+                child: const Text('Make Payment'),
+              ),
+            ],
+          ),
         ),
       ),
     );
