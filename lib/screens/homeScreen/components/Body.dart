@@ -25,14 +25,17 @@ List<Map<String, String>> carouselItems = [
   },
   {
     'imagePath': "assets/images/flawlessPayment.png",
-    'text': "Easy and fast modes of payment"
+    'text': "Easy and fast payments"
   },
   {
     'imagePath': "assets/images/gpsDirection.jpeg",
     'text': "Live location gps tracking to your destination"
   },
-  {'imagePath': "assets/images/transactions.png", 'text': "Sample texts"},
-  {'imagePath': "assets/images/invoice.jpg", 'text': "Sample text"},
+  {
+    'imagePath': "assets/images/transactions.png",
+    'text': "Still in development"
+  },
+  {'imagePath': "assets/images/invoice.jpg", 'text': "Still in development"},
 ];
 
 class _BodyState extends State<Body> {
@@ -42,7 +45,6 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig.init(context);
     return SizedBox(
       width: double.infinity,
       child: SingleChildScrollView(
@@ -50,7 +52,7 @@ class _BodyState extends State<Body> {
           children: [
             // SizedBox(height: SizeConfig.screenHeight! * 0.0005),
             SizedBox(
-              height: getScreenHeight(270),
+              height: getScreenHeight(263),
               child: Column(
                 children: <Widget>[
                   CarouselSlider(
@@ -87,7 +89,7 @@ class _BodyState extends State<Body> {
                     }).toList(),
                     options: CarouselOptions(
                       initialPage: 0,
-                      // autoPlay: true,
+                      autoPlay: true,
                       autoPlayInterval: const Duration(seconds: 6),
                       autoPlayAnimationDuration:
                           const Duration(milliseconds: 800),
@@ -106,11 +108,7 @@ class _BodyState extends State<Body> {
                     ),
                     carouselController: carouselController,
                   ),
-                  // Positioned(
-                  //   bottom: 5,
-                  //   left: 0,
-                  //   right: 0,
-                  //   child:
+
                   DotsIndicator(
                     dotsCount: 5,
                     position: currentPageValue.toDouble(),
@@ -118,7 +116,9 @@ class _BodyState extends State<Body> {
                       // color: const Color.fromARGB(255, 117, 117, 117),
                       color: const Color.fromARGB(255, 107, 107, 107),
                       activeColor: appPrimaryColor,
-                      size: Size.square(getScreenHeight(9.0)),
+                      size: Size.square(getScreenHeight(7.0)),
+                      spacing:
+                          EdgeInsets.symmetric(horizontal: getScreenWidth(4.5)),
                       activeSize:
                           Size(getScreenWidth(18.0), getScreenHeight(9.0)),
                       activeShape: RoundedRectangleBorder(
@@ -184,21 +184,23 @@ class _BodyState extends State<Body> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(left: 20),
+                                      padding: EdgeInsets.only(
+                                          left: getScreenWidth(15)),
                                       child: Text("New trip",
                                           style: TextStyle(
-                                              fontSize: getScreenWidth(21),
+                                              fontSize: getScreenWidth(19),
                                               fontWeight: FontWeight.w900,
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   200, 49, 49, 49))),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: getScreenWidth(5)),
                                       child: Icon(
-                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        color: const Color.fromARGB(
+                                            200, 49, 49, 49),
                                         Icons.arrow_forward,
-                                        size: getScreenWidth(30),
+                                        size: getScreenWidth(28),
                                       ),
                                     ),
                                   ],
@@ -246,21 +248,22 @@ class _BodyState extends State<Body> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsets.only(
-                                          left: getScreenWidth(20)),
+                                          left: getScreenWidth(15)),
                                       child: Text("Payment",
                                           style: TextStyle(
-                                              fontSize: getScreenWidth(21),
+                                              fontSize: getScreenWidth(19),
                                               fontWeight: FontWeight.w900,
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   200, 49, 49, 49))),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: getScreenWidth(5)),
                                       child: Icon(
-                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        color: const Color.fromARGB(
+                                            200, 49, 49, 49),
                                         Icons.arrow_forward,
-                                        size: getScreenWidth(30),
+                                        size: getScreenWidth(28),
                                       ),
                                     ),
                                   ],
@@ -311,21 +314,22 @@ class _BodyState extends State<Body> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsets.only(left: 20),
+                                      padding: const EdgeInsets.only(left: 15),
                                       child: Text("View Map",
                                           style: TextStyle(
-                                              fontSize: getScreenWidth(21),
+                                              fontSize: getScreenWidth(19),
                                               fontWeight: FontWeight.w900,
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   200, 49, 49, 49))),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: getScreenWidth(5)),
                                       child: Icon(
-                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        color: const Color.fromARGB(
+                                            200, 49, 49, 49),
                                         Icons.arrow_forward,
-                                        size: getScreenWidth(30),
+                                        size: getScreenWidth(28),
                                       ),
                                     ),
                                   ],
@@ -376,18 +380,19 @@ class _BodyState extends State<Body> {
                                           left: getScreenWidth(5)),
                                       child: Text("My Account",
                                           style: TextStyle(
-                                              fontSize: getScreenWidth(21),
+                                              fontSize: getScreenWidth(19),
                                               fontWeight: FontWeight.w900,
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   200, 49, 49, 49))),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: getScreenWidth(2)),
                                       child: Icon(
-                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        color: const Color.fromARGB(
+                                            200, 49, 49, 49),
                                         Icons.arrow_forward,
-                                        size: getScreenWidth(30),
+                                        size: getScreenWidth(28),
                                       ),
                                     ),
                                   ],
@@ -443,18 +448,19 @@ class _BodyState extends State<Body> {
                                           left: getScreenWidth(5)),
                                       child: Text("View \n Payments",
                                           style: TextStyle(
-                                              fontSize: getScreenWidth(21),
+                                              fontSize: getScreenWidth(19),
                                               fontWeight: FontWeight.w900,
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   221, 49, 49, 49))),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: getScreenWidth(2)),
                                       child: Icon(
-                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        color: const Color.fromARGB(
+                                            200, 49, 49, 49),
                                         Icons.arrow_forward,
-                                        size: getScreenWidth(30),
+                                        size: getScreenWidth(28),
                                       ),
                                     ),
                                   ],
@@ -505,18 +511,19 @@ class _BodyState extends State<Body> {
                                           left: getScreenWidth(5)),
                                       child: Text("My Account",
                                           style: TextStyle(
-                                              fontSize: getScreenWidth(21),
+                                              fontSize: getScreenWidth(19),
                                               fontWeight: FontWeight.w900,
-                                              color: Color.fromARGB(
+                                              color: const Color.fromARGB(
                                                   200, 49, 49, 49))),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           right: getScreenWidth(2)),
                                       child: Icon(
-                                        color: Color.fromARGB(200, 49, 49, 49),
+                                        color: const Color.fromARGB(
+                                            200, 49, 49, 49),
                                         Icons.arrow_forward,
-                                        size: getScreenWidth(30),
+                                        size: getScreenWidth(28),
                                       ),
                                     ),
                                   ],

@@ -78,7 +78,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(5.0),
+              padding: const EdgeInsets.all(5.0),
               child: Container(
                 height: getScreenHeight(200),
                 width: getScreenWidth(375),
@@ -89,7 +89,10 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
             ),
             Form(
               child: Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 10),
+                padding: EdgeInsets.only(
+                    left: getScreenWidth(16),
+                    right: getScreenWidth(16),
+                    bottom: getScreenHeight(10)),
                 child: TextFormField(
                   onChanged: (value) {
                     placesAutocomplete(value);
@@ -97,11 +100,14 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
                       hintText: "Search your destination location",
+                      hintStyle: TextStyle(fontSize: getScreenWidth(15)),
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        padding:
+                            EdgeInsets.symmetric(vertical: getScreenHeight(12)),
                         child: SvgPicture.asset(
                           "assets/icons/location.svg",
-                          height: 16,
+                          height: getScreenHeight(10),
+                          width: getScreenWidth(10),
                           color: const Color.fromARGB(255, 143, 141, 141),
                         ),
                       )),
@@ -109,12 +115,13 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               ),
             ),
             const Divider(
-              height: 6,
-              thickness: 2.5,
+              height: 5,
+              thickness: 2,
               color: secondaryColor5LightTheme,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+              padding: EdgeInsets.symmetric(
+                  vertical: getScreenHeight(5), horizontal: getScreenWidth(8)),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -132,7 +139,7 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
             ),
             const Divider(
               height: 4,
-              thickness: 2.5,
+              thickness: 2,
               color: secondaryColor5LightTheme,
             ),
             LocationListTile(
@@ -140,17 +147,17 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
               location: "Kabarak, Nakuru, Kenya",
             ),
             Container(),
-            const SizedBox(height: 20),
-            const Text(
+            SizedBox(height: getScreenHeight(20)),
+            Text(
               "Select Payment Method",
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 16,
+                  fontSize: getScreenWidth(15),
                   color: appPrimaryColor),
             ),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: getScreenWidth(20)),
               child: Row(children: <Widget>[
                 Checkbox(
                   shape: const RoundedRectangleBorder(
@@ -164,11 +171,13 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     });
                   },
                 ),
-                const Text(
+                Text(
                   "Mpesa Transaction",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: getScreenWidth(14)),
                 ),
-                const SizedBox(width: 30),
+                SizedBox(width: getScreenWidth(25)),
                 Checkbox(
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -181,45 +190,58 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     });
                   },
                 ),
-                const Text(
+                Text(
                   "Cash Money",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: getScreenWidth(14)),
                 ),
               ]),
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: getScreenHeight(15)),
             mPesa
                 ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: getScreenWidth(20)),
                     child: Column(
                       children: [
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: const EdgeInsets.only(
-                                top: 9, bottom: 9, left: 20),
-                            labelText: "Enter Your Mpesa Number",
-                            labelStyle: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w600),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    const BorderSide(color: appPrimaryColor)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                                borderSide:
-                                    const BorderSide(color: appPrimaryColor)),
+                        SizedBox(
+                          height: getScreenHeight(70),
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.only(
+                                  top: getScreenHeight(5),
+                                  bottom: getScreenHeight(5),
+                                  left: getScreenWidth(20)),
+                              labelText: "Enter Your Mpesa Number",
+                              prefixText: '+254',
+                              labelStyle: TextStyle(
+                                  fontSize: getScreenWidth(14),
+                                  fontWeight: FontWeight.w600),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide:
+                                      const BorderSide(color: appPrimaryColor)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide:
+                                      const BorderSide(color: appPrimaryColor)),
+                            ),
+                            keyboardType: TextInputType.number,
+                            maxLength: 9,
+                            onChanged: (value) {
+                              setState(() {
+                                _mpesaNumber = '254$value';
+                              });
+                            },
                           ),
-                          keyboardType: TextInputType.number,
-                          maxLength: 10,
-                          onChanged: (value) {
-                            setState(() {
-                              _mpesaNumber = value;
-                            });
-                          },
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              left: 55, right: 55, top: 10, bottom: 10),
+                          padding: EdgeInsets.only(
+                              left: getScreenWidth(60),
+                              right: getScreenWidth(60),
+                              top: getScreenHeight(10),
+                              bottom: getScreenHeight(10)),
                           child: DefaultButton(
                             pressed: () {
                               Navigator.push(
@@ -235,7 +257,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     ),
                   )
                 : Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: getScreenWidth(20)),
                   ),
             cash
                 ? Column(
@@ -267,23 +290,24 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
 
   Container commonLocations(location) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4),
+      padding: EdgeInsets.symmetric(horizontal: getScreenWidth(4)),
       child: ElevatedButton(
         onPressed: () {
           placesAutocomplete("Dubai");
         },
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
           backgroundColor: secondaryColor10LightTheme,
           foregroundColor: appPrimaryColor,
           elevation: 0,
-          fixedSize: const Size(double.infinity, 40),
+          fixedSize: Size(double.infinity, getScreenWidth(40)),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10)),
           ),
         ),
         child: Text(location,
-            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+            style: TextStyle(
+                fontSize: getScreenWidth(12), fontWeight: FontWeight.w600)),
       ),
     );
   }

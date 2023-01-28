@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:project_x/size_config.dart';
 
 import '../../../constants.dart';
 import '../../../extra components/defaultButton.dart';
@@ -34,39 +35,53 @@ class _SignUpFormState extends State<SignUpForm> {
       key: formKey,
       child: Column(
         children: [
-          const SizedBox(height: 30),
+          SizedBox(height: getScreenHeight(30)),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: SizedBox(height: 48, child: emailFormField()),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
+            child:
+                SizedBox(height: getScreenHeight(46), child: emailFormField()),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: getScreenHeight(20)),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: SizedBox(height: 48, child: nameFormField()),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
+            child:
+                SizedBox(height: getScreenHeight(46), child: nameFormField()),
           ),
-          const SizedBox(height: 20),
+          SizedBox(
+            height: getScreenHeight(20),
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: SizedBox(height: 48, child: phoneNumberFormField()),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
+            child: SizedBox(
+                height: getScreenHeight(46), child: phoneNumberFormField()),
           ),
-          const SizedBox(height: 20),
+          SizedBox(
+            height: getScreenHeight(20),
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: SizedBox(height: 48, child: passwordFormField()),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
+            child: SizedBox(
+                height: getScreenHeight(46), child: passwordFormField()),
           ),
-          const SizedBox(height: 20),
+          SizedBox(
+            height: getScreenHeight(20),
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: SizedBox(height: 48, child: confirmPasswordFormField()),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
+            child: SizedBox(
+                height: getScreenHeight(46), child: confirmPasswordFormField()),
           ),
-          const SizedBox(height: 5),
-          const Text(
+          SizedBox(
+            height: getScreenHeight(10),
+          ),
+          Text(
             "Sign up as:",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                fontSize: getScreenWidth(14), fontWeight: FontWeight.bold),
             textAlign: TextAlign.center,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(25)),
             child: Row(
               children: <Widget>[
                 Checkbox(
@@ -82,7 +97,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   },
                 ),
                 const Text("Operator"),
-                SizedBox(width: 50),
+                SizedBox(width: getScreenWidth(50)),
                 Checkbox(
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -99,15 +114,21 @@ class _SignUpFormState extends State<SignUpForm> {
               ],
             ),
           ),
-          const SizedBox(height: 10),
-          const Text(
-            "By pressing the Sign Up button you agree to our terms and conditions",
-            style: TextStyle(fontSize: 14, fontStyle: FontStyle.italic),
+          SizedBox(
+            height: getScreenHeight(10),
+          ),
+          Text(
+            "** By pressing the Sign Up button you agree to our terms and conditions **",
+            style: TextStyle(
+                fontSize: getScreenWidth(getScreenWidth(13)),
+                fontStyle: FontStyle.italic),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: 15),
+          SizedBox(
+            height: getScreenHeight(15),
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 78),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(85)),
             child: DefaultButton(
                 text: "Sign Up",
                 pressed: () {
@@ -142,11 +163,11 @@ class _SignUpFormState extends State<SignUpForm> {
       },
       onSaved: (newValue) => email = newValue!,
       decoration: InputDecoration(
-        labelStyle: const TextStyle(
-            fontSize: 18,
-            color: Color.fromARGB(255, 22, 22, 22),
+        labelStyle: TextStyle(
+            fontSize: getScreenWidth(18),
+            color: appPrimaryColor,
             fontWeight: FontWeight.bold),
-        hintStyle: const TextStyle(fontSize: 13),
+        hintStyle: TextStyle(fontSize: getScreenWidth(13)),
         labelText: "Email",
         hintText: "Enter Your Email address",
         enabledBorder: OutlineInputBorder(
@@ -176,11 +197,11 @@ class _SignUpFormState extends State<SignUpForm> {
           focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: const BorderSide(color: Colors.red)),
-          labelStyle: const TextStyle(
-              fontSize: 18,
-              color: Color.fromARGB(255, 22, 22, 22),
+          labelStyle: TextStyle(
+              fontSize: getScreenWidth(18),
+              color: appPrimaryColor,
               fontWeight: FontWeight.bold),
-          hintStyle: const TextStyle(fontSize: 13),
+          hintStyle: TextStyle(fontSize: getScreenWidth(13)),
           labelText: "Name",
           hintText: "Enter Your Name",
           enabledBorder: OutlineInputBorder(
@@ -203,11 +224,11 @@ class _SignUpFormState extends State<SignUpForm> {
         textInputAction: TextInputAction.next,
         onSaved: (newValue) => phoneNumber = newValue!,
         decoration: InputDecoration(
-          labelStyle: const TextStyle(
-              fontSize: 18,
-              color: Color.fromARGB(255, 22, 22, 22),
+          labelStyle: TextStyle(
+              fontSize: getScreenWidth(18),
+              color: appPrimaryColor,
               fontWeight: FontWeight.bold),
-          hintStyle: const TextStyle(fontSize: 13),
+          hintStyle: TextStyle(fontSize: getScreenWidth(13)),
           labelText: "Phone Number",
           hintText: "Enter Your Phone Number",
           enabledBorder: OutlineInputBorder(
@@ -228,11 +249,11 @@ class _SignUpFormState extends State<SignUpForm> {
         textInputAction: TextInputAction.next,
         onSaved: (newValue) => password = newValue!,
         decoration: InputDecoration(
-          labelStyle: const TextStyle(
-              fontSize: 18,
-              color: Color.fromARGB(255, 22, 22, 22),
+          labelStyle: TextStyle(
+              fontSize: getScreenWidth(18),
+              color: appPrimaryColor,
               fontWeight: FontWeight.bold),
-          hintStyle: const TextStyle(fontSize: 13),
+          hintStyle: TextStyle(fontSize: getScreenWidth(13)),
           labelText: "Password",
           hintText: "Enter Your Preferred Password",
           enabledBorder: OutlineInputBorder(
@@ -253,11 +274,11 @@ class _SignUpFormState extends State<SignUpForm> {
         textInputAction: TextInputAction.done,
         onSaved: (newValue) => confirmPassword = newValue!,
         decoration: InputDecoration(
-          labelStyle: const TextStyle(
-              fontSize: 18,
-              color: Color.fromARGB(255, 22, 22, 22),
+          labelStyle: TextStyle(
+              fontSize: getScreenWidth(18),
+              color: appPrimaryColor,
               fontWeight: FontWeight.bold),
-          hintStyle: const TextStyle(fontSize: 13),
+          hintStyle: TextStyle(fontSize: getScreenWidth(13)),
           labelText: "Confirm Your Password",
           hintText: "Re-enter your Password",
           enabledBorder: OutlineInputBorder(

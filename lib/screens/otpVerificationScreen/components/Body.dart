@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
+import '../../../size_config.dart';
 import '../../homeScreen/homeScreen.dart';
 import 'otpForm.dart';
 
@@ -12,43 +13,42 @@ class Body extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Padding(
-        // padding: EdgeInsets.symmetric(horizontal: getScreenWidth(20)),
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: getScreenWidth(20)),
         child: SingleChildScrollView(
           child: Column(
             children: [
               // SizedBox(height: SizeConfig.screenHeight! * 0.0005),
-              const SizedBox(height: 30),
-              const Text(
+              SizedBox(height: getScreenWidth(30)),
+              Text(
                 "Verification Code",
                 style: headingStyle,
               ),
-              const SizedBox(height: 10),
+              SizedBox(height: getScreenHeight(10)),
               const Text(
                 "Enter the verification code sent to \n +2547 12 123 123",
                 textAlign: TextAlign.center,
               ),
               TextButton(
                   onPressed: () {},
-                  child: const Text(
+                  child: Text(
                     "Change Phone Number",
                     style: TextStyle(
-                        fontSize: 14,
+                        fontSize: getScreenWidth(14),
                         color: appPrimaryColor,
                         fontWeight: FontWeight.bold),
                   )),
               const OtpForm(),
 
-              const SizedBox(height: 20),
+              SizedBox(height: getScreenHeight(20)),
               const Text("Didn't receive any code?"),
-              const SizedBox(height: 10),
+              SizedBox(height: getScreenHeight(10)),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
+                padding: EdgeInsets.symmetric(horizontal: getScreenWidth(15)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text("Resend code after: 1***"),
-                    const SizedBox(height: 10),
+                    SizedBox(height: getScreenHeight(10)),
                     TextButton(
                         onPressed: () {},
                         style: ButtonStyle(
@@ -59,21 +59,21 @@ class Body extends StatelessWidget {
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10))),
                         ),
-                        child: const Text(
+                        child: Text(
                           "Resend Code",
                           style: TextStyle(
-                              fontSize: 14,
+                              fontSize: getScreenWidth(13),
                               color: appPrimaryColor,
                               fontWeight: FontWeight.bold),
                         )),
                   ],
                 ),
               ),
-              const SizedBox(height: 40),
+              SizedBox(height: getScreenHeight(40)),
 
               SizedBox(
-                width: 200,
-                height: 55,
+                width: getScreenWidth(170),
+                height: getScreenHeight(50),
                 child: TextButton(
                   onPressed: () {
                     Navigator.push(
@@ -88,11 +88,11 @@ class Body extends StatelessWidget {
                         RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(25))),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Confirm",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: getScreenWidth(15),
                         fontWeight: FontWeight.bold),
                   ),
                 ),

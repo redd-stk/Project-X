@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:project_x/size_config.dart';
 
 class OtpForm extends StatelessWidget {
   const OtpForm({super.key});
@@ -19,8 +20,8 @@ class OtpForm extends StatelessWidget {
 
   SizedBox verificationInput(BuildContext context) {
     return SizedBox(
-      height: 68,
-      width: 64,
+      height: getScreenHeight(68),
+      width: getScreenWidth(64),
       child: TextFormField(
         onChanged: (value) {
           if (value.length == 1) {

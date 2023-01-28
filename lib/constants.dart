@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:project_x/size_config.dart';
 // import 'package:project_x/size_config.dart';
 
-const appPrimaryColor = Color.fromARGB(255, 30, 117, 247);
+const appPrimaryColor = Color.fromARGB(255, 50, 130, 250);
 const appTextColor = Color.fromARGB(255, 56, 56, 56);
-const textButtonColor = Color.fromARGB(238, 0, 119, 255);
+const textButtonColor = Color.fromARGB(255, 50, 130, 250);
 
-const headingStyle = TextStyle(
+final headingStyle = TextStyle(
   // fontSize: getScreenWidth(29),
-  fontSize: 30,
+  fontSize: getScreenWidth(29),
   color: Color.fromARGB(255, 30, 117, 247),
   fontWeight: FontWeight.bold,
 );

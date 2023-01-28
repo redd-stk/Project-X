@@ -6,7 +6,8 @@ import '../../../extra components/defaultButton.dart';
 import '../../../theme.dart';
 
 class CheckboxRow extends StatefulWidget {
-  const CheckboxRow({super.key});
+  final bool pDetails;
+  const CheckboxRow({Key? key, required this.pDetails}) : super(key: key);
 
   @override
   _CheckboxRowState createState() => _CheckboxRowState();
@@ -45,13 +46,15 @@ class _CheckboxRowState extends State<CheckboxRow> {
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
                   value: _sendMoney,
-                  onChanged: (value) {
-                    setState(() {
-                      _sendMoney = value!;
-                      _tillNumber = false;
-                      _paybill = false;
-                    });
-                  },
+                  onChanged: !widget.pDetails
+                      ? null
+                      : (value) {
+                          setState(() {
+                            _sendMoney = value!;
+                            _tillNumber = false;
+                            _paybill = false;
+                          });
+                        },
                 ),
                 Text(
                   "Send Money",
@@ -64,13 +67,15 @@ class _CheckboxRowState extends State<CheckboxRow> {
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
                   value: _tillNumber,
-                  onChanged: (value) {
-                    setState(() {
-                      _tillNumber = value!;
-                      _sendMoney = false;
-                      _paybill = false;
-                    });
-                  },
+                  onChanged: !widget.pDetails
+                      ? null
+                      : (value) {
+                          setState(() {
+                            _tillNumber = value!;
+                            _sendMoney = false;
+                            _paybill = false;
+                          });
+                        },
                 ),
                 Text(
                   "Till number",
@@ -83,13 +88,15 @@ class _CheckboxRowState extends State<CheckboxRow> {
                     borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
                   value: _paybill,
-                  onChanged: (value) {
-                    setState(() {
-                      _paybill = value!;
-                      _sendMoney = false;
-                      _tillNumber = false;
-                    });
-                  },
+                  onChanged: !widget.pDetails
+                      ? null
+                      : (value) {
+                          setState(() {
+                            _sendMoney = false;
+                            _tillNumber = false;
+                            _paybill = value!;
+                          });
+                        },
                 ),
                 Text(
                   "Paybill",
@@ -104,6 +111,7 @@ class _CheckboxRowState extends State<CheckboxRow> {
                     children: <Widget>[
                       TextFormField(
                         // enabled: _paymentDetails == null ? true : false,
+                        enabled: !widget.pDetails == false ? true : false,
                         controller: _phoneNumberTextController,
                         decoration: inputDeco("Enter Phone Number"),
                         keyboardType: TextInputType.number,
@@ -120,17 +128,20 @@ class _CheckboxRowState extends State<CheckboxRow> {
                           });
                         },
                       ),
-                      Visibility(
-                        visible:
-                            _phoneNumber.isEmpty || _phoneNumber.length < 10,
-                        child: _phoneNumber.isEmpty
-                            ? Text("Phone Number cannot be empty",
-                                style: TextStyle(
-                                    fontSize: getScreenWidth(13.5),
-                                    color: Color.fromARGB(255, 255, 38, 23)))
-                            : const Text("Enter a valid phone number",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 255, 38, 23))),
+                      Offstage(
+                        offstage: !widget.pDetails,
+                        child: Visibility(
+                          visible:
+                              _phoneNumber.isEmpty || _phoneNumber.length < 10,
+                          child: _phoneNumber.isEmpty
+                              ? Text("Phone Number cannot be empty",
+                                  style: TextStyle(
+                                      fontSize: getScreenWidth(13.5),
+                                      color: Color.fromARGB(255, 255, 38, 23)))
+                              : const Text("Enter a valid phone number",
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 255, 38, 23))),
+                        ),
                       )
                     ],
                   )
@@ -139,6 +150,7 @@ class _CheckboxRowState extends State<CheckboxRow> {
                 ? Column(
                     children: <Widget>[
                       TextFormField(
+                        enabled: !widget.pDetails == false ? true : false,
                         keyboardType: TextInputType.number,
                         decoration: inputDeco("Enter Paybill Number"),
                         onChanged: (value) {
@@ -155,6 +167,7 @@ class _CheckboxRowState extends State<CheckboxRow> {
                       ),
                       SizedBox(height: getScreenHeight(10)),
                       TextFormField(
+                        enabled: !widget.pDetails == false ? true : false,
                         decoration: inputDeco("Enter Account Number"),
                         onChanged: (value) {
                           setState(() {
@@ -168,22 +181,25 @@ class _CheckboxRowState extends State<CheckboxRow> {
                           });
                         },
                       ),
-                      Visibility(
-                        visible:
-                            _paybillNumber.isEmpty || _accountNumber.isEmpty,
-                        child: Column(
-                          children: [
-                            if (_paybillNumber.isEmpty)
-                              Text("Paybill Number cannot be empty",
-                                  style: TextStyle(
-                                      fontSize: getScreenWidth(13.5),
-                                      color: Colors.red)),
-                            if (_accountNumber.isEmpty)
-                              Text("Account Number cannot be empty",
-                                  style: TextStyle(
-                                      fontSize: getScreenWidth(13.5),
-                                      color: Colors.red))
-                          ],
+                      Offstage(
+                        offstage: !widget.pDetails,
+                        child: Visibility(
+                          visible:
+                              _paybillNumber.isEmpty || _accountNumber.isEmpty,
+                          child: Column(
+                            children: [
+                              if (_paybillNumber.isEmpty)
+                                Text("Paybill Number cannot be empty",
+                                    style: TextStyle(
+                                        fontSize: getScreenWidth(13.5),
+                                        color: Colors.red)),
+                              if (_accountNumber.isEmpty)
+                                Text("Account Number cannot be empty",
+                                    style: TextStyle(
+                                        fontSize: getScreenWidth(13.5),
+                                        color: Colors.red))
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -193,6 +209,7 @@ class _CheckboxRowState extends State<CheckboxRow> {
                 ? Column(
                     children: [
                       TextFormField(
+                        enabled: !widget.pDetails == false ? true : false,
                         decoration: inputDeco("Enter Till Number"),
                         keyboardType: TextInputType.number,
                         onChanged: (value) {
@@ -206,12 +223,15 @@ class _CheckboxRowState extends State<CheckboxRow> {
                           });
                         },
                       ),
-                      Visibility(
-                        visible: _tillNumberInput.isEmpty,
-                        child: Text("Till Number value cannot be empty",
-                            style: TextStyle(
-                                fontSize: getScreenWidth(13.5),
-                                color: Color.fromARGB(255, 255, 38, 23))),
+                      Offstage(
+                        offstage: !widget.pDetails,
+                        child: Visibility(
+                          visible: _tillNumberInput.isEmpty,
+                          child: Text("Till Number value cannot be empty",
+                              style: TextStyle(
+                                  fontSize: getScreenWidth(13.5),
+                                  color: Color.fromARGB(255, 255, 38, 23))),
+                        ),
                       ),
                     ],
                   )

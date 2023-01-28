@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../../constants.dart';
+import '../../size_config.dart';
 import 'components/Body.dart';
 
 class OtpVerification extends StatelessWidget {
@@ -9,6 +10,7 @@ class OtpVerification extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -18,8 +20,8 @@ class OtpVerification extends StatelessWidget {
           statusBarIconBrightness: Brightness.dark,
         ),
         iconTheme: const IconThemeData(color: Colors.black),
-        titleTextStyle: const TextStyle(
-          fontSize: 22,
+        titleTextStyle: TextStyle(
+          fontSize: getScreenWidth(22),
           fontWeight: FontWeight.bold,
           color: appPrimaryColor,
         ),

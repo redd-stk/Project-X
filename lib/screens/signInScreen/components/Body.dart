@@ -3,6 +3,7 @@ import 'package:project_x/screens/signUpScreen/SignUpScreen.dart';
 
 import '../../../constants.dart';
 import '../../../extra components/defaultButton.dart';
+import '../../../size_config.dart';
 import '../../otpVerificationScreen/otpverification.dart';
 import 'SignInForm.dart';
 
@@ -11,64 +12,69 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return SizedBox(
       width: double.infinity,
       child: Padding(
-        // padding: EdgeInsets.symmetric(horizontal: getScreenWidth(20)),
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: getScreenWidth(25)),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 50),
+              SizedBox(height: getScreenHeight(50)),
               // SizedBox(height: SizeConfig.screenHeight! * 0.0005),
               CircleAvatar(
-                backgroundColor: Colors.black,
-                radius: 48,
+                // foregroundColor: Colors.grey,
+                // backgroundColor: Colors.black,
+                radius: getScreenWidth(45),
                 child: Image.asset("assets/images/logo.jpeg"),
               ),
-              const SizedBox(height: 10),
-              const Text(
+              SizedBox(height: getScreenHeight(10)),
+              Text(
                 "Welcome Back",
                 style: headingStyle,
               ),
-              const SizedBox(height: 10),
-              const Text(
+              SizedBox(height: getScreenHeight(10)),
+              Text(
                 "Login with your registered email and password to continue",
                 textAlign: TextAlign.center,
+                style: TextStyle(fontSize: getScreenWidth(14)),
               ),
-              const SizedBox(height: 25),
-              const SignInForm(),
-              const SizedBox(height: 10),
+              SizedBox(height: getScreenHeight(25)),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: getScreenWidth(5)),
+                child: const SignInForm(),
+              ),
+              SizedBox(height: getScreenHeight(10)),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextButton(
                     onPressed: () {},
                     // TODO : Add a new screen for phone number sign in
-                    child: const Text(
+                    child: Text(
                       "Login with phone number",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: textButtonColor,
-                          fontSize: 13),
+                          fontSize: getScreenWidth(13)),
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  SizedBox(height: getScreenHeight(5)),
                   TextButton(
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
                       "Forgot Password?",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: textButtonColor,
-                          fontSize: 13),
+                          fontSize: getScreenWidth(13)),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 25),
+              SizedBox(height: getScreenHeight(25)),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 78),
+                padding: EdgeInsets.symmetric(horizontal: getScreenWidth(90)),
                 child: DefaultButton(
                     text: "Sign In",
                     pressed: () {
@@ -78,7 +84,7 @@ class Body extends StatelessWidget {
                               builder: (context) => const OtpVerification()));
                     }),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: getScreenHeight(30)),
               const NoAccountText(),
             ],
           ),
@@ -96,17 +102,17 @@ class NoAccountText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
+        Text(
           "Don't have an account? ",
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: getScreenWidth(13)),
         ),
         GestureDetector(
             onTap: () => Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const SignUpScreen())),
-            child: const Text(
+            child: Text(
               "Sign Up ",
               style: TextStyle(
-                  fontSize: 14,
+                  fontSize: getScreenWidth(13),
                   color: textButtonColor,
                   fontWeight: FontWeight.bold),
             ))

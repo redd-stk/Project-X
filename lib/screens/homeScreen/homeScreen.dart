@@ -10,6 +10,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(235, 203, 212, 245),
       appBar: AppBar(
@@ -29,7 +30,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             Text(
               'Hello "User"',
-              style: TextStyle(color: Color.fromARGB(255, 83, 82, 82)),
+              style: TextStyle(
+                  fontSize: getScreenWidth(22),
+                  color: const Color.fromARGB(255, 83, 82, 82)),
             ),
             SizedBox(height: getScreenWidth(7)),
             Text(
@@ -37,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               style: TextStyle(
                   fontSize: getScreenWidth(12),
                   fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(255, 100, 99, 99)),
+                  color: const Color.fromARGB(255, 100, 99, 99)),
             )
           ],
         ),

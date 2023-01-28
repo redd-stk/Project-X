@@ -8,6 +8,7 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -46,24 +47,25 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
+                            size: getScreenWidth(32),
                             Icons.account_circle,
                             color: Colors.grey,
                           ),
-                          SizedBox(width: getScreenWidth(15)),
+                          SizedBox(width: getScreenWidth(10)),
                           Text("User Account Name",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: getScreenWidth(15),
+                                  fontSize: getScreenWidth(14),
                                   color:
                                       const Color.fromARGB(255, 80, 79, 79))),
                         ],
                       ),
                       TextButton.icon(
-                        icon: Icon(Icons.edit, size: getScreenWidth(20)),
+                        icon: Icon(Icons.edit, size: getScreenWidth(18)),
                         label: Text(
                           "Edit",
-                          style: TextStyle(fontSize: getScreenWidth(14)),
+                          style: TextStyle(fontSize: getScreenWidth(13)),
                         ),
                         onPressed: () {
                           // handle edit button press
@@ -79,24 +81,25 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
+                            size: getScreenWidth(25),
                             Icons.mail,
                             color: Colors.grey,
                           ),
-                          SizedBox(width: getScreenWidth(15)),
+                          SizedBox(width: getScreenWidth(10)),
                           Text("User Account email",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: getScreenWidth(15),
+                                  fontSize: getScreenWidth(14),
                                   color:
                                       const Color.fromARGB(255, 80, 79, 79))),
                         ],
                       ),
                       TextButton.icon(
-                        icon: Icon(Icons.edit, size: getScreenWidth(20)),
+                        icon: Icon(Icons.edit, size: getScreenWidth(18)),
                         label: Text(
                           "Edit",
-                          style: TextStyle(fontSize: getScreenWidth(14)),
+                          style: TextStyle(fontSize: getScreenWidth(13)),
                         ),
                         onPressed: () {
                           // handle edit button press
@@ -112,24 +115,25 @@ class AccountScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
+                            size: getScreenWidth(26),
                             Icons.phone,
                             color: Colors.grey,
                           ),
-                          SizedBox(width: getScreenWidth(15)),
+                          SizedBox(width: getScreenWidth(10)),
                           Text("User Phone number",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: getScreenWidth(15),
+                                  fontSize: getScreenWidth(14),
                                   color:
                                       const Color.fromARGB(255, 80, 79, 79))),
                         ],
                       ),
                       TextButton.icon(
-                        icon: Icon(Icons.edit, size: getScreenWidth(20)),
+                        icon: Icon(Icons.edit, size: getScreenWidth(18)),
                         label: Text(
                           "Edit",
-                          style: TextStyle(fontSize: getScreenWidth(14)),
+                          style: TextStyle(fontSize: getScreenWidth(13)),
                         ),
                         onPressed: () {
                           // handle edit button press
@@ -147,21 +151,25 @@ class AccountScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            const Icon(
+                            Icon(
+                              size: getScreenWidth(26),
                               Icons.lock,
                               color: Colors.grey,
                             ),
-                            SizedBox(width: getScreenWidth(15)),
+                            SizedBox(width: getScreenWidth(10)),
                             Text("Change Account Password",
                                 // _user.displayName,
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: getScreenWidth(15),
+                                    fontSize: getScreenWidth(14),
                                     color:
                                         const Color.fromARGB(255, 80, 79, 79))),
                           ],
                         ),
-                        const Icon(Icons.arrow_forward_ios),
+                        const Icon(
+                          Icons.arrow_forward_ios,
+                          color: Color.fromARGB(255, 119, 119, 119),
+                        ),
                       ],
                     ),
                   ),
@@ -169,52 +177,73 @@ class AccountScreen extends StatelessWidget {
                     thickness: 1,
                   ),
                   SizedBox(
-                    height: getScreenHeight(30),
+                    height: getScreenHeight(70),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          Icons.home,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(width: getScreenHeight(15)),
-                        Text("Back Home",
-                            // _user.displayName,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: getScreenHeight(15),
-                                color: const Color.fromARGB(255, 80, 79, 79))),
-                        SizedBox(width: getScreenHeight(10)),
-                        const Icon(
-                          Icons.arrow_forward_ios,
-                          color: Colors.grey,
-                        ),
-                      ],
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: getScreenWidth(30)),
+                    child: TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            const Color.fromARGB(255, 224, 224, 224)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                      ),
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.exit_to_app, color: Colors.red),
+                          SizedBox(width: getScreenHeight(10)),
+                          Text("Logout",
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontSize: getScreenWidth(15))),
+                        ],
+                      ),
                     ),
                   ),
-                  SizedBox(height: getScreenHeight(50)),
-                  TextButton(
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(
-                          const Color.fromARGB(255, 224, 224, 224)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                    ),
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.exit_to_app, color: Colors.red),
-                        SizedBox(width: getScreenHeight(10)),
-                        const Text("Logout",
-                            style: TextStyle(color: Colors.red, fontSize: 16)),
-                      ],
+                  SizedBox(height: getScreenHeight(30)),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: getScreenWidth(85)),
+                    child: TextButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(175, 243, 242, 242)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            size: getScreenWidth(28),
+                            Icons.home,
+                            color: Colors.grey,
+                          ),
+                          SizedBox(width: getScreenHeight(10)),
+                          Text("Back Home",
+                              // _user.displayName,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: getScreenHeight(15),
+                                  color:
+                                      const Color.fromARGB(255, 80, 79, 79))),
+                          SizedBox(width: getScreenHeight(5)),
+                          const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Colors.grey,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],

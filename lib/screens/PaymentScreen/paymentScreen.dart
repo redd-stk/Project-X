@@ -18,7 +18,7 @@ class QRScanScreen1 extends StatefulWidget {
 final _paymentDetailsController = TextEditingController();
 
 class _QRScanScreenState1 extends State<QRScanScreen1> {
-  // var _paymentDetails = '';
+  bool pDetails = true;
   @override
   void initState() {
     super.initState();
@@ -93,7 +93,7 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                                   children: [
                                     Icon(
                                       Icons.photo_camera,
-                                      size: getScreenWidth(65),
+                                      size: getScreenWidth(60),
                                       color: appPrimaryColor,
                                     ),
                                     SizedBox(height: getScreenHeight(15)),
@@ -103,8 +103,8 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                                       style: TextStyle(
                                           fontSize: getScreenWidth(14),
                                           fontWeight: FontWeight.bold,
-                                          color:
-                                              Color.fromARGB(255, 44, 43, 43)),
+                                          color: const Color.fromARGB(
+                                              255, 44, 43, 43)),
                                     )
                                   ],
                                 ),
@@ -139,7 +139,7 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                               initialValue:
                                   "!! Payment details not available for now !!",
                               style: TextStyle(
-                                  fontSize: getScreenWidth(14),
+                                  fontSize: getScreenWidth(13),
                                   color: Colors.red),
                               enabled: true,
                             ),
@@ -155,47 +155,41 @@ class _QRScanScreenState1 extends State<QRScanScreen1> {
                       //   enabled: false,
                       // ),
                     ),
-                    SizedBox(height: getScreenHeight(20)),
+                    SizedBox(height: getScreenHeight(5)),
                     Text(
-                      "Or \nEnter Details Manually",
+                      'Or',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: getScreenWidth(14.5),
                           color: appPrimaryColor),
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Enter Payment Details Manually?",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: getScreenWidth(14.5),
+                              color: appPrimaryColor),
+                        ),
+                        Checkbox(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
+                            ),
+                            value: pDetails,
+                            onChanged: (value) {
+                              setState(() {
+                                pDetails = value!;
+                              });
+                            })
+                      ],
+                    ),
                     SizedBox(height: getScreenHeight(5)),
-                    const CheckboxRow(),
-                    // const SizedBox(height: 15),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 105),
-                    //   child: Container(
-                    //     height: 45,
-                    //     decoration: BoxDecoration(
-                    //         color: const Color.fromARGB(215, 245, 245, 245),
-                    //         borderRadius: BorderRadius.circular(10)),
-                    //     child: TextButton(
-                    //         onPressed: () {
-                    //           Navigator.pop(context);
-                    //         },
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.center,
-                    //           children: const [
-                    //             Icon(
-                    //               Icons.arrow_back,
-                    //               size: 30,
-                    //             ),
-                    //             SizedBox(width: 5),
-                    //             Text(
-                    //               "Back Home",
-                    //               style: TextStyle(
-                    //                   fontWeight: FontWeight.bold,
-                    //                   fontSize: 16),
-                    //             ),
-                    //           ],
-                    //         )),
-                    //   ),
-                    // )
+                    CheckboxRow(pDetails: pDetails)
                   ],
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_x/constants.dart';
+import 'package:project_x/size_config.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({super.key});
@@ -23,13 +24,15 @@ class _SignInFormState extends State<SignInForm> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: SizedBox(height: 48, child: emailFormField()),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
+            child:
+                SizedBox(height: getScreenHeight(48), child: emailFormField()),
           ),
-          const SizedBox(height: 15),
+          SizedBox(height: getScreenHeight(15)),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: SizedBox(height: 48, child: passwordFormField()),
+            padding: EdgeInsets.symmetric(horizontal: getScreenWidth(10)),
+            child: SizedBox(
+                height: getScreenHeight(48), child: passwordFormField()),
           ),
         ],
       ),
@@ -43,11 +46,11 @@ class _SignInFormState extends State<SignInForm> {
         textInputAction: TextInputAction.next,
         onSaved: (newValue) => email = newValue!,
         decoration: InputDecoration(
-          labelStyle: const TextStyle(
-              fontSize: 18,
+          labelStyle: TextStyle(
+              fontSize: getScreenWidth(18),
               color: appPrimaryColor,
               fontWeight: FontWeight.bold),
-          hintStyle: const TextStyle(fontSize: 14),
+          hintStyle: TextStyle(fontSize: getScreenWidth(13)),
           labelText: "Email",
           hintText: "Enter Your Email address",
           enabledBorder: OutlineInputBorder(
@@ -69,12 +72,12 @@ class _SignInFormState extends State<SignInForm> {
         textInputAction: TextInputAction.done,
         onSaved: (newValue) => password = newValue!,
         decoration: InputDecoration(
-          labelStyle: const TextStyle(
-              fontSize: 18,
+          labelStyle: TextStyle(
+              fontSize: getScreenWidth(18),
               color: appPrimaryColor,
               fontWeight: FontWeight.bold),
           labelText: "Password",
-          hintStyle: const TextStyle(fontSize: 14),
+          hintStyle: TextStyle(fontSize: getScreenWidth(13)),
           hintText: "Enter Your Password",
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
